@@ -10,6 +10,7 @@ return array(
 	//'sourceLanguage'=>'ru',
 	// pre-loading components
 	'preload'=>array('log'),
+	'theme' => 'uts',
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -25,7 +26,6 @@ return array(
 	),
 
 	'modules'=>array(
-		
 		'action_logger',
 		'admin'=>array(),
 		'rights'=>array(
