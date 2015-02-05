@@ -51,7 +51,7 @@
         <div class="container">
             <div class="info-block">
                 <div class="col-md-5 logotype">
-                    <a href="#"><img src="images/logotype.png" width="397" height="65" title="" /></a>
+                    <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/logotype.png" width="397" height="65" title="" /></a>
                 </div>
                 <div class="col-md-3 phones">
                     <a href="tel:88003222223">8 800<span>322 22 23</span></a>
@@ -99,7 +99,7 @@
                     <li><a href="#">Товары и комплектующие</a></li>
                 </ul>
 
-                <div class="widget">
+                <!--<div class="widget">
                     <h2 class="wget-name">Новости</h2>
                     <div class="news">
                         <div>
@@ -131,14 +131,14 @@
                         </div>
                     </div>
                     <a href="#" class="wget-anchor">Все новости</a>
-                </div>
+                </div>-->
             </div>
             <div class="col-md-8 right-column">
                 <form class="global-form">
                     <fieldset></fieldset>
                     <input type="text" name="" placeholder="Введите слово для поиска среди 12.000 товаров">
                     <button class="btn btn-info">Найти</button>
-                    <a href="#">Расширенный поиск</a>
+                    <!--<a href="#">Расширенный поиск</a>-->
                 </form>
                 <div class="banner">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -392,25 +392,25 @@
                     <ul>
                         <li class="heading">О компании</li>
                         <li><a href="#">Пресс-центр</a></li>
-                        <li><a href="#">Вакансии</a></li>
-                        <li><a href="#">Реквизиты</a></li>
-                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Реквизиты</a></li>
+                        <li><a href="#">О компании</a></li>
                     </ul>
                     <ul>
                         <li class="heading">Помощь</li>
                         <li><a href="#">Как сделать заказ</a></li>
-                        <li><a href="#">Доставка</a></li>
-                        <li><a href="#">Оплата</a></li>
-                        <li><a href="#">Гарантии</a></li>
-                        <li><a href="#">Помощь</a></li>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Оплата</a></li>
+                        <li><a href="#">Гарантии</a></li>
+                        <li><a href="#">Помощь</a></li>
                     </ul>
                     <ul>
                         <li class="heading">Обратная связь</li>
                         <li><a href="#">Зарабатывайте с нами</a></li>
-                        <li><a href="#">Продавайте Ваши товары</a></li>
-                        <li><a href="#">Зарабатывайте на партнерской программе</a></li>
-                        <li><a href="#">Размещайте рекламу</a></li>
-                        <li><a href="#">Открывайте пункты выдачи заказов</a></li>
+                        <li><a href="#">Продавайте Ваши товары</a></li>
+                        <li><a href="#">Зарабатывайте на партнерской программе</a></li>
+                        <li><a href="#">Размещайте рекламу</a></li>
+                        <li><a href="#">Открывайте пункты выдачи заказов</a></li>
                     </ul>
                 </div>
             </div>
@@ -421,17 +421,17 @@
     <div class="container">
         <div class="left-side">
             <span class="to-top"></span>
-            <a href="#">Обратная связь</a>
+            <!--<a href="#">Обратная связь</a>-->
         </div>
         <div class="widgets">
-            <div class="compare">
+            <!--<div class="compare">
                 <p>В сравнение</p>
                 <span class="badge">0</span>
             </div>
-            <div class="bookmarks">
-                <p>Закладки</p>
+             <div class="bookmarks">
+               <p>Закладки</p>
                 <span class="badge">2</span>
-            </div>
+            </div>-->
             <div class="cart">
                 <p>Корзина</p>
                 <span class="badge">0</span>
