@@ -5,11 +5,10 @@
  * This template is loaded thru ajax request after new product added to cart.
  */
 ?>
-<div class="cart_left"></div>
-<div class="cart_right">
-	<a href="<?php echo Yii::app()->createUrl('/orders/cart/index') ?>" class="light">
-		<?php echo Yii::app()->cart->countItems() ?> товаров
-		- <?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?>
-		<?php echo Yii::app()->currency->active->symbol ?>
-	</a>
+<div class="left">
+	<span class="badge active"><?php echo Yii::app()->cart->countItems() ?></span>
+</div>
+<div class="right">
+	<span><?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?></span>
+	<a class="btn btn-transparent" href="/cart">оформить</a>
 </div>

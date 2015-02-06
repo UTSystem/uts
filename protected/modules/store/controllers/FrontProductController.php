@@ -5,7 +5,7 @@
  */
 class FrontProductController extends Controller
 {
-
+	public $layout = '//layouts/card';
 	/**
 	 * @var StoreProduct
 	 */
