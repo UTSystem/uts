@@ -1,78 +1,222 @@
-<?php
+<div class="banner">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+			<!--<li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
+		</ol>
 
-/**
- * Site start view
- */
-?>
-
-<div class="banners" align="center">
-	<a href="/products/search/q/Apple"><img src="/themes/default/assets/images/mainPageBanner.png"></a>
-</div>
-
-<div class="wide_line">
-	<span>Популярные товары</span>
-</div>
-
-<div class="products_list">
-	<?php
-		foreach($popular as $p)
-			$this->renderPartial('_product', array('data'=>$p));
-	?>
-</div>
-
-<?php $this->beginClip('underFooter'); ?>
-<div style="clear:both;"></div>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#shares .share_list ul li a").click(function(){
-			$("#shares .share_list ul li").removeClass('active');
-			$(this).parent().addClass('active');
-			$("#shares .products_list").load('/store/index/renderProductsBlock/'+$(this).attr('href'));
-			return false;
-		});
-	});
-</script>
-
-<div id="shares">
-	<div class="shared_products">
-		<div class="share_list">
-			<ul>
-				<li class="active"><a href="newest">Новинки</a></li>
-				<li><a href="added_to_cart">Хиты продаж</a></li>
-			</ul>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/banner/banner2.jpg" alt="...">
+				<div class="carousel-caption">
+					В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
+				</div>
+			</div>
+			<div class="item">
+				<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/banner/banner.gif" alt="...">
+				<div class="carousel-caption">
+					В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
+				</div>
+			</div>
+			<div class="item">
+				<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/banner/banner3.jpg" alt="...">
+				<div class="carousel-caption">
+					В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
+				</div>
+			</div>
+			<div class="item">
+				<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/banner/banner4.jpg" alt="...">
+				<div class="carousel-caption">
+					В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
+				</div>
+			</div>
 		</div>
 
-		<div style="clear:both;"></div>
-
-		<div class="products_list">
-			<?php
-			foreach($newest as $p)
-				$this->renderPartial('_product', array('data'=>$p));
-			?>
+		<!-- Controls -->
+		<!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">-->
+			<!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+			<!--<span class="sr-only">Previous</span>-->
+		<!--</a>-->
+		<!--<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">-->
+			<!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+			<!--<span class="sr-only">Next</span>-->
+		<!--</a>-->
+	</div> <!-- carousel -->
+</div>
+<div class="items grid-block">
+	<h2 class="wget-name">Лидеры продаж</h2>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
 		</div>
 	</div>
 </div>
 
-
-<div class="centered">
-	<div class="wide_line">
-		<span>Новости</span>
-
+<div class="items grid-block newest">
+	<h2 class="wget-name">Новинки</h2>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
 	</div>
-
-	<ul class="news">
-		<?php foreach($news as $n): ?>
-		<li>
-			<span class="date"><?php echo $n->created ?></span>
-			<a href="<?php echo $n->viewUrl ?>" class="title"><?php echo $n->title ?></a>
-			<p><?php echo $n->short_description ?></p>
-		</li>
-		<?php endforeach; ?>
-	</ul>
-
-	<div class="all_news">
-		<a href="<?=$n->category->viewUrl?>">Все новости</a>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="inner">
+			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
+			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
+			<div class="price">
+				<span>15 840</span>
+				<a href="#" class="btn btn-info btn-buy">Купить</a>
+			</div>
+		</div>
 	</div>
 </div>
-<?php $this->endClip(); ?>
+
+<div class="info grid-block">
+	<h2 class="wget-name">о компании</h2>
+	<p>Интернет-магазин основан в 1998 году. официальным днем открытия магазина  Приказчик слушал и улыбался, желая<br/> запомнить для употребления сколько можно больше из умных разговоров. А мы были два ненавидящих друг друга <br/>колодника, связанных одной цепью, отравляющие жизнь друг другу и старающиеся не видать этого. <br/><br/>Я еще не знал тогда, что 0,99 супружеств живут в таком же аду, как и я жил, и что это не может быть иначе. Тогда я еще не знал этого ни про других, ни про себя.<br/><br/> А мы были два ненавидящих друг друга колодника, связанных одной цепью, отравляющие жизнь друг другу и старающиеся не видать этого.</p>
+</div>
