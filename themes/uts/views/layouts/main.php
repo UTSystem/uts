@@ -41,8 +41,17 @@
                     <a href="#" alt="">Контакты</a>
                 </div>
                 <div class="col-md-6">
-                    <a href="#" alt="">Войти</a>
-                    <a href="#" alt="">Регистрация</a>
+					<?php if(Yii::app()->user->isGuest): ?>
+						<?php echo CHtml::link(Yii::t('core','Войти'), array('/users/login/login'), array('class'=>'light')) ?>
+						
+						<?php echo CHtml::link(Yii::t('core','Регистрация'), array('/users/register'), array('class'=>'light')) ?>
+					<?php else: ?>
+						<?php echo CHtml::link(Yii::t('core','Личный кабинет'), array('/users/profile/index'), array('class'=>'light')) ?>
+						
+						<?php echo CHtml::link(Yii::t('core','Мои заказы'), array('/users/profile/orders'), array('class'=>'light')) ?>
+						
+						<?php echo CHtml::link(Yii::t('core','Выход'), array('/users/login/logout'), array('class'=>'light')) ?>
+					<?php endif; ?>
                 </div>
             </div> <!-- top navi -->
         </div>
@@ -51,7 +60,7 @@
         <div class="container">
             <div class="info-block">
                 <div class="col-md-5 logotype">
-                    <a href="#"><img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/logotype.png" width="397" height="65" title="" /></a>
+                    <a href="/"><img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/logotype.png" width="397" height="65" title="" /></a>
                 </div>
                 <div class="col-md-3 phones">
                     <a href="tel:88003222223">8 800<span>322 22 23</span></a>
@@ -60,22 +69,50 @@
                 <div class="col-md-4">
                     <div class="cart-panel">
                         <div class="left">
-                            <span class="badge active">4</span>
+                            <span class="badge active"><?php echo Yii::app()->cart->countItems() ?></span>
                         </div>
                         <div class="right">
-                            <span>88 540</span>
-                            <a href="#" class="btn btn-transparent">оформить</a>
+                            <span><?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?></span>
+                            <a href="<?php echo Yii::app()->createUrl('/cart') ?>" class="btn btn-transparent">оформить</a>
                         </div>
                     </div>
                 </div>
             </div> <!-- info block -->
         </div>
     </div> <!-- header -->
+	
+	<div class="row helper-block">
+        <div class="container">
+            <div class="col-md-4">
+                <a href="#" class="btn btn-info">каталог товаров</a>
+            </div>
+            <div class="col-md-8">
+                <?php echo CHtml::form($this->createUrl('/store/category/search'),'', array('class'=>'global-form')) ?>
+					<fieldset></fieldset>
+					<input type="text" placeholder="Введите слово для поиска среди 12.000 товаров" name="q" id="searchQuery"/>
+					<button class="btn btn-info">Найти</button>
+					<a href="#">Расширенный поиск</a>
+				<?php echo CHtml::endForm() ?>
+            </div>
+        </div>
+    </div>
+	
     <div class="row content two-columns helper-block main">
         <div class="container">
             <div class="col-md-4 left-column">
-                <a href="#" class="btn btn-info">каталог товаров</a>
-                <ul>
+                <?php
+					Yii::import('application.modules.store.models.StoreCategory');
+					$items = StoreCategory::model()->findByPk(1)->asCMenuArray();
+					if(isset($items['items']))
+					{
+						$this->widget('application.extensions.mbmenu.MbMenu',array(
+							'cssFile'=>Yii::app()->theme->baseUrl.'/assets/css/menu.css',
+							'htmlOptions'=>array('class'=>'dropdown', 'id'=>'nav'),
+							'items'=>$items['items'])
+						);
+					}
+				?>
+				<!--<ul>
                     <li><a href="#">Книги</a></li>
                     <li>
                         <a href="#">Посуда</a>
@@ -99,7 +136,7 @@
                     <li><a href="#">Товары и комплектующие</a></li>
                 </ul>
 
-                <!--<div class="widget">
+                <div class="widget">
                     <h2 class="wget-name">Новости</h2>
                     <div class="news">
                         <div>
@@ -133,242 +170,16 @@
                     <a href="#" class="wget-anchor">Все новости</a>
                 </div>-->
             </div>
+			
             <div class="col-md-8 right-column">
-                <form class="global-form">
-                    <fieldset></fieldset>
-                    <input type="text" name="" placeholder="Введите слово для поиска среди 12.000 товаров">
-                    <button class="btn btn-info">Найти</button>
-                    <!--<a href="#">Расширенный поиск</a>-->
-                </form>
-                <div class="banner">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                            <!--<li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="images/banner/banner2.jpg" alt="...">
-                                <div class="carousel-caption">
-                                    В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="images/banner/banner.gif" alt="...">
-                                <div class="carousel-caption">
-                                    В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="images/banner/banner3.jpg" alt="...">
-                                <div class="carousel-caption">
-                                    В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="images/banner/banner4.jpg" alt="...">
-                                <div class="carousel-caption">
-                                    В честь торжественного открытия нашего магазина <a href="#">скидка на ножи 20%</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Controls -->
-                        <!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">-->
-                        <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
-                        <!--<span class="sr-only">Previous</span>-->
-                        <!--</a>-->
-                        <!--<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">-->
-                        <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
-                        <!--<span class="sr-only">Next</span>-->
-                        <!--</a>-->
-                    </div> <!-- carousel -->
-                </div>
-
-                <div class="items grid-block">
-                    <h2 class="wget-name">Лидеры продаж</h2>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="items grid-block newest">
-                    <h2 class="wget-name">Новинки</h2>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="inner">
-                            <a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-                            <img src="images/test-item.jpg" width="149" height="96">
-                            <div class="price">
-                                <span>15 840</span>
-                                <a href="#" class="btn btn-info btn-buy">Купить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info grid-block">
-                    <h2 class="wget-name">о компании</h2>
-                    <p>Интернет-магазин основан в 1998 году. официальным днем открытия магазина  Приказчик слушал и улыбался, желая<br/> запомнить для употребления сколько можно больше из умных разговоров. А мы были два ненавидящих друг друга <br/>колодника, связанных одной цепью, отравляющие жизнь друг другу и старающиеся не видать этого. <br/><br/>Я еще не знал тогда, что 0,99 супружеств живут в таком же аду, как и я жил, и что это не может быть иначе. Тогда я еще не знал этого ни про других, ни про себя.<br/><br/> А мы были два ненавидящих друг друга колодника, связанных одной цепью, отравляющие жизнь друг другу и старающиеся не видать этого.</p>
-                </div>
+				<?php echo $content; ?>
             </div>
         </div>
     </div> <!-- content -->
     <div class="row footer">
         <div class="container">
             <div class="col-md-4">
-                <img src="images/logotype-footer.png" width="220" height="115">
+                <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/logotype-footer.png" width="220" height="115">
             </div>
             <div class="col-md-8">
                 <div class="left-side">
@@ -434,14 +245,40 @@
             </div>-->
             <div class="cart">
                 <p>Корзина</p>
-                <span class="badge">0</span>
-                <i>88 540</i>
-                <a href="#" class="btn btn-transparent">оформить</a>
+                <span class="badge"><?php echo Yii::app()->cart->countItems() ?></span>
+                <i><?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?></i>
+                <a href="<?php echo Yii::app()->createUrl('/cart') ?>" class="btn btn-transparent">оформить</a>
             </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+ 
+$(function() {
+	$('.to-top').hide();
+	$(window).scroll(function() {
+	 
+		if($(this).scrollTop() != 0) {
+		 
+			$('.to-top').fadeIn();
+		 
+		} else {
+		 
+			$('.to-top').fadeOut();
+		 
+		}
+	 
+	});
+	 
+	$('.to-top').click(function() {
+	 
+		$('body,html').animate({scrollTop:0},800);
+	 
+	});
+ 
+});
+ 
+</script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
