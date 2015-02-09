@@ -84,7 +84,7 @@
 	<div class="row helper-block">
         <div class="container">
             <div class="col-md-4">
-                <a href="#" class="btn btn-info">каталог товаров</a>
+                <a href="<?php echo $this->createUrl('/store/category'); ?>" class="btn btn-info">каталог товаров</a>
             </div>
             <div class="col-md-8">
                 <?php echo CHtml::form($this->createUrl('/store/category/search'),'', array('class'=>'global-form')) ?>

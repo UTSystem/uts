@@ -80,6 +80,14 @@ class CategoryController extends Controller
 	}
 
 	/**
+	 * Display all categories
+	 */
+	public function actionIndex()
+	{
+		$this->render('index');
+	}
+	
+	/**
 	 * Display category products
 	 */
 	public function actionView()

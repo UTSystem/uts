@@ -100,6 +100,15 @@ class StoreCategoryNode extends CComponent implements ArrayAccess
 		return $this->{$offset};
 	}
 
+	/**
+	 * @param $offset
+	 * @return mixed
+	 */
+	public function privateGet($offset)
+	{
+		return $this->model->{$offset};
+	}
+	
 	public function offsetExists($offset) {}
 	public function offsetSet($offset, $value) {}
 	public function offsetUnset($offset) {}

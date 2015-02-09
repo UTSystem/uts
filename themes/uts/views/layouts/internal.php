@@ -33,6 +33,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/app2.css" rel="stylesheet">
 	<link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/item.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/jquery.raty.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/category.css" rel="stylesheet">
 	<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -98,7 +99,7 @@
 	<div class="row helper-block">
         <div class="container">
             <div class="col-md-4">
-                <a href="#" class="btn btn-info">каталог товаров</a>
+                <a href="<?php echo $this->createUrl('/store/category'); ?>" class="btn btn-info">каталог товаров</a>
             </div>
             <div class="col-md-8">
                 <?php echo CHtml::form($this->createUrl('/store/category/search'),'', array('class'=>'global-form')) ?>
