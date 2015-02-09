@@ -71,3 +71,18 @@ $this->widget('application.modules.store.widgets.SCategoryRender', array(
 ));
 ?>
 </div>
+
+<div class="brands">
+	<h2 class="wget-name">Популярные бренды</h2>
+	<ul width="100%" style="list-style-type:none; padding:0px;">
+		<?php
+			//$model = new StoreManufacturer('search');
+			$brands = StoreManufacturer::model()->findAll();
+			
+			foreach($brands as $key=>$row)
+			{
+				echo '<li  style="float:left; padding:10px;"><img alt="'.$row->name.'" src="'.Yii::app()->theme->baseUrl.'/assets/images/brands/anabella-logo.jpg" width="114" height="30"/></li>';
+			}
+		?>
+	</ul>
+</div>
