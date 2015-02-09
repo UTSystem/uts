@@ -10,6 +10,7 @@
 class CategoryController extends Controller
 {
 
+	public $layout = '//layouts/internal';
 	/**
 	 * @var StoreProduct
 	 */
