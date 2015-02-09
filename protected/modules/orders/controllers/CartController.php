@@ -10,6 +10,7 @@ Yii::import('store.models.*');
 class CartController extends Controller
 {
 
+	public $layout = '//layouts/cart';
 	/**
 	 * @var OrderCreateForm
 	 */
