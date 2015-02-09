@@ -45,15 +45,39 @@ $this->breadcrumbs[] = $this->model->name;
 		</div>
 	</div>
 </div>
+
 <div class="items grid-block custom-grid <?php if($itemView==='_product_wide') echo 'custom-grid-list'; ?>">
 	<?php
 		$this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$provider,
 			'ajaxUpdate'=>false,
-			'template'=>'{items} {pager}',
+			'template'=>'{items}</div></div></div> {pager}</nav>',
 			'itemView'=>$itemView,
 			'sortableAttributes'=>array(
 				'name', 'price'
+			),
+			'pagerCssClass' => 'pagi',
+			'pager'=> array(     
+				
+				'header' => '<nav>',
+				'firstPageLabel' => 'Первая страница&#160;',
+				'lastPageLabel' => 'Последняя страница&#160;',
+				'prevPageLabel' => 'Предыдущая&#160;',
+				'nextPageLabel' => 'Следующая&#160;',
+				'maxButtonCount' => 10,
+				
+				'firstPageCssClass'=>'',//default "first"
+				'lastPageCssClass'=>'',//default "last"
+				'previousPageCssClass'=>'pager_previous',//default "previours"
+				'nextPageCssClass'=>'pager_next',//default "next"
+				'internalPageCssClass'=>'page',//default "page"
+				'selectedPageCssClass'=>'page disabled',//default "selected"
+				'hiddenPageCssClass'=>'disabled',//default "hidden"        
+				
+				'htmlOptions' => array(
+					'class' => 'pagination'
+				),
+				'footer' => '</nav>',	
 			),
 		));
 	?>
