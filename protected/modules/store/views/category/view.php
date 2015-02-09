@@ -51,7 +51,7 @@ $this->breadcrumbs[] = $this->model->name;
 		$this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$provider,
 			'ajaxUpdate'=>false,
-			'template'=>'{items}</div></div></div> {pager}</nav>',
+			'template'=>'{items}</div></div>{pager}</nav>',
 			'itemView'=>$itemView,
 			'sortableAttributes'=>array(
 				'name', 'price'
