@@ -19,6 +19,11 @@ return array(
 				'url'=>array('/admin/pages/category'),
 				'position'=>4
 			),
+			array(
+				'label'=>Yii::t('PagesModule.core', 'Слайдер'),
+				'url'=>array('/admin/pages/slider'),
+				'position'=>4
+			),
 		),
 	),
 );
