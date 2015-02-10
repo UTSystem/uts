@@ -15,35 +15,20 @@
 			echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('frontProduct/view', 'url'=>$data->url));
 		?>
 		<div class="specs">
-			<span>Размер: евро</span>
-			<span>Ткань: сатин</span>
+			<?php 
+				$attributes = $data->getEavAttributes();
+				if(!empty($attributes))
+					$attributes_html = $this->renderPartial('../frontProduct/_attributes', array('model'=>$data, 'count'=>2), true);
+				echo $attributes_html;
+			?>
 		</div>
 		<div class="specs-extend">
-			<table>
-
-				<tr>
-					<td>Размер:</td>
-					<td>евро</td>
-				</tr>
-				<tr>
-					<td>Ткань:</td>
-					<td>сатин</td>
-				</tr>
-				<tr>
-					<td>Пододеяльник:</td>
-					<td>200*220</td>
-				</tr>
-				<tr>
-					<td>Простыня:</td>
-					<td>240*260</td>
-				</tr>
-				<tr>
-					<td>Наволочка:</td>
-					<td>50*70 (2шт)<br/>
-						70*70 (2шт)
-					</td>
-				</tr>
-			</table>
+			<?php 
+				$attributes = $data->getEavAttributes();
+				if(!empty($attributes))
+					$attributes_html = $this->renderPartial('../frontProduct/_attributes', array('model'=>$data), true);
+				echo $attributes_html;
+			?>
 		</div>
 		<div class="price">
 			<span>
@@ -72,10 +57,11 @@
 				}
 				else
 				{
-					echo CHtml::link('Нет в наличии', '#', array(
+					echo '<p class="error">Нет в наличии</p>';
+					/*echo CHtml::link('Нет в наличии', '#', array(
 						'onclick' => 'showNotifierPopup('.$data->id.'); return false;',
 						'class'   => 'notify_link',
-					));
+					));*/
 				}
 			?>
 			<?php echo CHtml::endForm() ?>

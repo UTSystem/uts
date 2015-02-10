@@ -20,6 +20,11 @@ class SAttributesTableRenderer extends CWidget
 	public $model;
 
 	/**
+	 * @var count of view attributes
+	 */
+	public $count;
+	
+	/**
 	 * @var array table element attributes
 	 */
 	public $htmlOptions = array();
@@ -48,6 +53,9 @@ class SAttributesTableRenderer extends CWidget
 		if(!empty($data))
 		{
 			echo CHtml::openTag('table', $this->htmlOptions);
+
+			if($this->count) $data = array_slice($data, 0, $this->count);
+
 			foreach($data as $title=>$value)
 			{
 				echo CHtml::openTag('tr');
