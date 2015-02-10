@@ -13,6 +13,8 @@ $this->pageDescription = $model->meta_description;
 // Register main script
 Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/product.view.js', CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/product.view.configurations.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/assets/js/magnific.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/assets/css/magnific-popup.css');
 
 // Create breadcrumbs
 if($model->mainCategory)
@@ -39,46 +41,34 @@ if($model->mainCategory)
 		<li role="overview" class="disabled"><a href="#">Обзор</a></li>
 		<li role="description"><a href="#">Описание</a></li>
 		<li role="parameters"><a href="#">Характеристики</a></li>
-		<!--<li role="in-compare">
-			<a href="#">
-				В сравнении
-				<span class="badge">10</span>
-			</a>
-		</li>
-		<li role="to-bookmark"><a href="#">В закладки</a></li>
-		<li role="reviews">
-			<a href="#">
-				Отзывы
-				<span class="badge">2</span>
-			</a>
-		</li>
-		<li role="discuss"><a href="#">Обсудить товар</a></li>-->
 		<li role="to-catalog"><a href="#">Вернуться в каталог</a></li>
 	</ul>
 </div>
 <div class="photo-prices">
 	<div class="photo-block"> <!-- col-md-6 -->
 		<div class="photo">
-			<a href="#">
-				<?php
-					// Main product image
-					if($model->mainImage)
-						echo CHtml::image($model->mainImage->getUrl('565x424', 'resize'), $model->mainImage->title);
-					else
-						echo CHtml::link(CHtml::image('http://placehold.it/565x424'), '#', array('class'=>'thumbnail'));
-				?>
-			</a>
-			<ul>
-				<?php
-					// Display additional images
-					foreach($model->imagesNoMain as $image)
-					{
-						echo CHtml::openTag('li', array('class'=>'span2'));
-						echo CHtml::link(CHtml::image($image->getUrl('79x59'), $image->title), $image->getUrl(), array('class'=>'thumbnail'));
-						echo CHtml::closeTag('li');
-					}
-				?>
-			</ul>
+			<div class="popup-gallery">
+				<a href="<?php echo $model->mainImage->getUrl();?>">
+					<?php
+						// Main product image
+						if($model->mainImage)
+							echo CHtml::image($model->mainImage->getUrl('565x424', 'resize'), $model->mainImage->title);
+						else
+							echo CHtml::link(CHtml::image('http://placehold.it/565x424'), '#', array('class'=>'thumbnail'));
+					?>
+				</a>
+				<ul>
+					<?php
+						// Display additional images
+						foreach($model->imagesNoMain as $image)
+						{
+							echo CHtml::openTag('li', array('class'=>'span2'));
+							echo CHtml::link(CHtml::image($image->getUrl('79x59'), $image->title), $image->getUrl(), array('class'=>'thumbnail'));
+							echo CHtml::closeTag('li');
+						}
+					?>
+				</ul>
+			</div>
 		</div>
 	</div>
 
@@ -188,3 +178,25 @@ if($model->mainCategory)
 		</div>-->
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.popup-gallery').magnificPopup({
+	  delegate: 'a',
+	  type: 'image',
+	  tLoading: 'Loading image #%curr%...',
+	  mainClass: 'mfp-img-mobile',
+	  gallery: {
+		enabled: true,
+		navigateByImgClick: true,
+		preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+	  },
+	  image: {
+		tError: '&lt;a href="%url%"&gt;The image #%curr%&lt;/a&gt; could not be loaded.',
+		titleSrc: function(item) {
+		  return item.el.attr('title');
+		}
+	  }
+	});
+});
+</script>
