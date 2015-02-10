@@ -52,8 +52,10 @@ if(empty($items))
 				</ul>
 				
 				<?php 
-					if($product['model']->availability==1) echo '<p class="success">'.StoreProduct::getAvailabilityItems()[$product['model']->availability].'</p>';
-					else echo '<p class="failure">'.StoreProduct::getAvailabilityItems()[$product['model']->availability].'</p>';
+					$getAvailabilityItems=StoreProduct::getAvailabilityItems();
+
+					if($product['model']->availability==1) echo '<p class="success">'.$getAvailabilityItems[$product['model']->availability].'</p>';
+					else echo '<p class="failure">'.$getAvailabilityItems[$product['model']->availability].'</p>';
 				?>
 			</td>
 			<td valign="top">
