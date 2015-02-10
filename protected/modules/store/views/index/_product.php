@@ -7,13 +7,13 @@
 
 <div class="item">
 	<div class="inner">
-		<?php echo CHtml::link(CHtml::encode($data->name), array('frontProduct/view', 'url'=>$data->url)) ?>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('frontProduct/view', 'url'=>$data->url),array('class'=>'title')) ?>
 		<?php
 			if($data->mainImage)
 				$imgSource = $data->mainImage->getUrl('149x96');
 			else
-				$imgSource = 'http://placehold.it/190x150';
-			echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('frontProduct/view', 'url'=>$data->url), array('class'=>'thumbnail'));
+				$imgSource = 'http://placehold.it/149x96';
+			echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('frontProduct/view', 'url'=>$data->url));
 		?>
 		<div class="price">
 			<span>

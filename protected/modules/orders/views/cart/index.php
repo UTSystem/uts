@@ -50,12 +50,14 @@ if(empty($items))
 					<li>Ткань: сатин</li>
 					<li>Цвет: синий <a href="#">изменить</a></li>
 				</ul>
-				<p class="success">Есть в наличии</p>
-				<p class="failure">Есть в наличии</p>
-				<p class="error">Есть в наличии</p>
+				
+				<?php 
+					if($product['model']->availability==1) echo '<p class="success">'.StoreProduct::getAvailabilityItems()[$product['model']->availability].'</p>';
+					else echo '<p class="failure">'.StoreProduct::getAvailabilityItems()[$product['model']->availability].'</p>';
+				?>
 			</td>
 			<td valign="top">
-				<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value"/>
+				<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
 			</td>
 			<td class="price" valign="top">
 				<?php

@@ -28,13 +28,10 @@ if($model->mainCategory)
 	if ($model->mainCategory->id != 1)
 		$this->breadcrumbs[$model->mainCategory->name] = $model->mainCategory->getViewUrl();
 }
-
-// Fancybox ext
-/*$this->widget('application.extensions.fancybox.EFancyBox', array(
-	'target'=>'a.thumbnail',
-));*/
-
 ?>
+
+<? //print_R($model); die; ?>
+
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <div class="item-panel">
 	<ul class="nav nav-pills">
@@ -53,7 +50,7 @@ if($model->mainCategory)
 					if($model->mainImage)
 						echo CHtml::link(CHtml::image($model->mainImage->getUrl('565x424', 'resize'), $model->mainImage->title), $model->mainImage->getUrl());
 					else
-						echo CHtml::link(CHtml::image('http://placehold.it/565x424'), 'http://placehold.it/565x424', array('class'=>'thumbnail'));
+						echo CHtml::link(CHtml::image('http://placehold.it/565x424'), 'http://placehold.it/565x424');
 				?>
 				<ul>
 					<?php
@@ -61,7 +58,7 @@ if($model->mainCategory)
 						foreach($model->imagesNoMain as $image)
 						{
 							echo CHtml::openTag('li', array('class'=>'span2'));
-							echo CHtml::link(CHtml::image($image->getUrl('79x59'), $image->title), $image->getUrl(), array('class'=>'thumbnail'));
+							echo CHtml::link(CHtml::image($image->getUrl('79x59'), $image->title), $image->getUrl());
 							echo CHtml::closeTag('li');
 						}
 					?>
@@ -77,9 +74,9 @@ if($model->mainCategory)
 					<!--<a href="#"><span>Хотите дешевле?</span></a>-->
 					<span class="price">
 						<?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?>
-						<?php //echo Yii::app()->currency->active->symbol; ?>
+						<?php echo Yii::app()->currency->active->symbol; ?>
 					</span>
-					<p>Есть в наличии</p>
+					<p><?php echo StoreProduct::getAvailabilityItems()[$model->availability]; ?></p>
 					<?php
 						echo CHtml::form(array('/orders/cart/add'));
 						echo CHtml::hiddenField('product_id', $model->id);

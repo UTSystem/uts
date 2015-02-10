@@ -6,13 +6,13 @@
 ?>
 <div class="item">
 	<div class="inner">
-		<span class="title" href="#"><?php echo CHtml::link(CHtml::encode($data->name), array('frontProduct/view', 'url'=>$data->url)) ?></span>
+		<span class="title" href="#"><?php echo CHtml::link(CHtml::encode($data->name), array('frontProduct/view', 'url'=>$data->url),array('class'=>'title')) ?></span>
 		<?php
 			if($data->mainImage)
 				$imgSource = $data->mainImage->getUrl('149x96');
 			else
 				$imgSource = 'http://placehold.it/149x96';
-			echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('frontProduct/view', 'url'=>$data->url), array('class'=>'thumbnail'));
+			echo CHtml::link(CHtml::image($imgSource, $data->mainImageTitle), array('frontProduct/view', 'url'=>$data->url));
 		?>
 		<div class="specs">
 			<span>Размер: евро</span>
