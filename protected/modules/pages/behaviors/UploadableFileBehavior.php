@@ -4,7 +4,7 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
     /**
      * @var string название атрибута, хранящего в себе имя файла и файл
      */
-    public $attributeName='document';
+    public $attributeName='old_name';
      /**
      * @var int максимальный размер файла в байтах
      */
@@ -16,7 +16,7 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
      /**
      * @var int максимальный размер файла в байтах
      */
-    public $savePathAlias='webroot.media';
+    public $savePathAlias='webroot.uploads.slider';
     /**
      * @var array сценарии валидации к которым будут добавлены правила валидации
      * загрузки файлов
@@ -25,7 +25,7 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
     /**
      * @var string типы файлов, которые можно загружать (нужно для валидации)
      */
-    public $fileTypes='doc,docx,xls,xlsx,odt,pdf';
+    public $fileTypes='jpg, png, gif, jpeg';
  
     /**
      * Шорткат для Yii::getPathOfAlias($this->savePathAlias).DIRECTORY_SEPARATOR.

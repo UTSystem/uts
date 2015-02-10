@@ -44,10 +44,8 @@ class SliderController extends SAdminController {
 				$model->created = date('Y-m-d H:i:s');
 			$model->updated = date('Y-m-d H:i:s');
             
-			if ($model->save(false))
+			if ($model->save())
 			{
-				//$model->save();
-
 				$this->setFlashMessage(Yii::t('PagesModule.core', 'Изменения успешно сохранены'));
 
 				if (isset($_POST['REDIRECT']))
@@ -55,7 +53,7 @@ class SliderController extends SAdminController {
 				else
 					$this->redirect(array('index'));
 			}
-		else {print_R($model->getErrors()); die;}
+		else {$this->setFlashMessage(Yii::t('PagesModule.core', $model->getErrors()));}
         }
 
         $this->render('update', array(

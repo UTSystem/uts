@@ -104,7 +104,7 @@ class Slider extends BaseModel
                 'class'=>'application.modules.pages.behaviors.UploadableFileBehavior',
 				'attributeName' => 'old_name',
 				'savePathAlias' => 'webroot.uploads.slider',
-				'fileTypes' => 'jpg, jpeg, png, gif, csv, doc, docx, xls, xlsx, odt, pdf',
+				'fileTypes' => 'jpg, jpeg, png, gif',
 				'maxSize' => 80240000, // 80 мб
 				'upload_model' => 'Slider' // модель откуда приходит форма
             )
