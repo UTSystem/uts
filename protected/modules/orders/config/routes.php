@@ -6,6 +6,7 @@ return array(
 	'cart/remove/<index>'=>'orders/cart/remove',
 	'cart/clear'=>'orders/cart/clear',
 	'cart/renderSmallCart'=>'orders/cart/renderSmallCart',
+	'cart/renderBottomCart'=>'orders/cart/renderBottomCart',
 	'cart/view/<secret_key>'=>'orders/cart/view',
 	'processPayment/*'=>'orders/payment/process',
 	'orders/cart'=>'site/error',

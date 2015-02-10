@@ -62,7 +62,8 @@ function addProductToWishList(id)
  */
 function reloadSmallCart()
 {
-    $("#cart").load('/cart/renderSmallCart');
+	$("#cart").load('/cart/renderSmallCart');
+	$("#cart-bottom").load('/cart/renderBottomCart');
 }
 
 /**

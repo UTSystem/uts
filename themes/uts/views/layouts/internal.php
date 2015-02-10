@@ -223,7 +223,7 @@
                <p>Закладки</p>
                 <span class="badge">2</span>
             </div>-->
-            <div class="cart">
+            <div class="cart" id="cart-bottom">
                 <p>Корзина</p>
                 <span class="badge"><?php echo Yii::app()->cart->countItems() ?></span>
                 <i><?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?></i>

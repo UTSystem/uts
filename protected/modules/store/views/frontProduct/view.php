@@ -48,15 +48,13 @@ if($model->mainCategory)
 	<div class="photo-block"> <!-- col-md-6 -->
 		<div class="photo">
 			<div class="popup-gallery">
-				<a href="<?php echo $model->mainImage->getUrl();?>">
-					<?php
-						// Main product image
-						if($model->mainImage)
-							echo CHtml::image($model->mainImage->getUrl('565x424', 'resize'), $model->mainImage->title);
-						else
-							echo CHtml::link(CHtml::image('http://placehold.it/565x424'), '#', array('class'=>'thumbnail'));
-					?>
-				</a>
+				<?php
+					// Main product image
+					if($model->mainImage)
+						echo CHtml::link(CHtml::image($model->mainImage->getUrl('565x424', 'resize'), $model->mainImage->title), $model->mainImage->getUrl());
+					else
+						echo CHtml::link(CHtml::image('http://placehold.it/565x424'), 'http://placehold.it/565x424', array('class'=>'thumbnail'));
+				?>
 				<ul>
 					<?php
 						// Display additional images

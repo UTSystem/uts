@@ -1,10 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PekopT
- * Date: 13.01.15
- * Time: 22:31
- */
+
+	Yii::import('application.modules.store.components.SCompareProducts');
+	Yii::import('application.modules.store.models.wishlist.StoreWishlist');
+
+	$assetsManager = Yii::app()->clientScript;
+	$assetsManager->registerCoreScript('jquery');
+	$assetsManager->registerCoreScript('jquery.ui');
+
+	// jGrowl notifications
+	Yii::import('ext.jgrowl.Jgrowl');
+	Jgrowl::register();
+
+	// Disable jquery-ui default theme
+	$assetsManager->scriptMap=array(
+		'jquery-ui.css'=>false,
+	);
 ?>
 
 <!DOCTYPE html>
@@ -13,13 +23,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>utc idx</title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
     <!-- Bootstrap -->
     <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,700,400italic&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/app.css" rel="stylesheet">
+	<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,7 +78,7 @@
                     <a href="#">Заказать обратный звонок</a>
                 </div>
                 <div class="col-md-4">
-                    <div class="cart-panel">
+                    <div class="cart-panel" id="cart">
                         <div class="left">
                             <span class="badge active"><?php echo Yii::app()->cart->countItems() ?></span>
                         </div>
@@ -243,7 +254,7 @@
                <p>Закладки</p>
                 <span class="badge">2</span>
             </div>-->
-            <div class="cart">
+            <div class="cart" id="cart-bottom">
                 <p>Корзина</p>
                 <span class="badge"><?php echo Yii::app()->cart->countItems() ?></span>
                 <i><?php echo StoreProduct::formatPrice(Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())) ?></i>
@@ -279,8 +290,8 @@ $(function() {
 });
  
 </script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <!--<script src="js/bootstrap.min.js"></script>-->
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/carousel.js"></script>

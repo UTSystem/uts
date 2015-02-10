@@ -131,89 +131,21 @@
 		</div>
 	</div>
 </div>
-
+<style>
+.right-column .items.grid-block .item .price input{
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 13px;
+    margin-top: 19px;
+    text-transform: none;
+}
+</style>
 <div class="items grid-block newest">
 	<h2 class="wget-name">Новинки</h2>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
-	<div class="item">
-		<div class="inner">
-			<a class="title" href="#">Постельное белье из ранфорса TAC RANFORCE BLOSSOM бело-розовое полутороспальное</a>
-			<img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/images/test-item.jpg" width="149" height="96">
-			<div class="price">
-				<span>15 840</span>
-				<a href="#" class="btn btn-info btn-buy">Купить</a>
-			</div>
-		</div>
-	</div>
+	<?php
+	foreach($newest as $p)
+		$this->renderPartial('_product', array('data'=>$p));
+	?>
 </div>
 
 <div class="info grid-block">

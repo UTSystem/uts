@@ -167,6 +167,14 @@ class CartController extends Controller
 	}
 
 	/**
+	 * Render data to display in theme bottom.
+	 */
+	public function actionRenderBottomCart()
+	{
+		$this->renderPartial('_bottom_cart');
+	}
+	
+	/**
 	 * Create new order
 	 * @return Order
 	 */
