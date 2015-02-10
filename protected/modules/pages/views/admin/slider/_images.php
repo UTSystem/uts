@@ -18,12 +18,12 @@ Yii::app()->getClientScript()->registerCss('infoStyles', "
 		margin-left:190px
 	}
 ");
-
+/*
 // Upload button
-/*echo CHtml::openTag('div', array('class'=>'row'));
+echo CHtml::openTag('div', array('class'=>'row'));
 echo CHtml::label(Yii::t('PagesModule.core', 'Выберите изображения'), 'files');
 	$this->widget('system.web.widgets.CMultiFileUpload', array(
-		'name'=>'SliderImage',
+		'name'=>'old_name',
 		'model'=>$model,
 		'attribute'=>'files',
 		'accept'=>implode('|', StoreImagesConfig::get('extensions')),
@@ -33,9 +33,9 @@ echo CHtml::closeTag('div');*/
 // Images
 
 
-if ((array)$model->image)
+if ((array)$model->old_name)
 {
-	foreach($model->image as $image)
+	foreach($model->old_name as $image)
 	{
 		$this->widget('zii.widgets.CDetailView', array(
 			'data'=>$image,

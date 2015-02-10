@@ -26,11 +26,48 @@ class SliderController extends SAdminController {
 		$this->actionUpdate(true);
 	}
 
+	public function actionUpdate($id) {
+        $model = $this->loadModel($id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (Yii::app()->request->isPostRequest)
+		{
+			$model->attributes = $_POST['Slider'];
+
+			 $model->attachBehavior('UploadableFileBehavior', array(
+                'class'=>'application.modules.pages.behaviors.UploadableFileBehavior',
+            ));
+			
+			if ($model->isNewRecord)
+				$model->created = date('Y-m-d H:i:s');
+			$model->updated = date('Y-m-d H:i:s');
+            
+			if ($model->save(false))
+			{
+				//$model->save();
+
+				$this->setFlashMessage(Yii::t('PagesModule.core', 'Изменения успешно сохранены'));
+
+				if (isset($_POST['REDIRECT']))
+					$this->smartRedirect($model);
+				else
+					$this->redirect(array('index'));
+			}
+		else {print_R($model->getErrors()); die;}
+        }
+
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
+	
 	/**
 	 * Create or update new banner
 	 * @param boolean $new
 	 */
-	public function actionUpdate($new = false)
+	public function actionUpdate1($new = false)
 	{
 		if ($new === true)
 		{
@@ -58,24 +95,24 @@ class SliderController extends SAdminController {
 
 			//$images = CUploadedFile::getInstancesByName('Slider');
 			
-			$model->image=CUploadedFile::getInstance($model,'image');
+			/*$model->image=CUploadedFile::getInstance($model,'image');
 			
 			if ($model->image){
 				$sourcePath = pathinfo($model->image->getName());	
 				$fileName = $model->id.'-slider.'.$sourcePath['extension'];
 				//$model->image = $fileName;
-			}	
+			}	*/
 
 			if ($model->validate())
 			{
 				$model->save();
 
-				if ($model->image){				
+				/*if ($model->image){				
 					//сохранить файл на сервере в каталог images/2011 под именем 
 					//month-day-alias.jpg
 					$file = Yii::getPathOfAlias('webroot.uploads').'/slider/'.$fileName;
 					$model->image->saveAs($file);
-				}
+				}*/
 				
 				$this->setFlashMessage(Yii::t('PagesModule.core', 'Изменения успешно сохранены'));
 
@@ -112,23 +149,10 @@ class SliderController extends SAdminController {
 		}
 	}
 	
-	/**
-	 * @param Slider $model
-	 */
-	public function handleUploadedImages(Slider $model)
-	{
-		$images = CUploadedFile::getInstancesByName('SliderImage');
-
-		if($images && sizeof($images) > 0)
-		{
-			/** var $image CUploadedFile */
-			foreach($images as $image)
-			{
-				if(!StoreUploadedImage::hasErrors($image))
-					$model->addImage($image);
-				else
-					$this->setFlashMessage(Yii::t('StoreModule.admin', 'Ошибка загрузки изображения {name}', array('{name}'=>$image->getName())));
-			}
-		}
-	}
+	public function loadModel($id) {
+        $model = Slider::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        return $model;
+    }
 }

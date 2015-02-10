@@ -22,10 +22,10 @@ $this->breadcrumbs = array(
 $this->pageHeader = $title;
 
 ?>
-
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
 <!-- Use padding-all class with SidebarAdminTabs -->
 <div class="form wide padding-all">
-	<?php echo $form; ?>
+	<?php //echo $form; ?>
 </div>
 
 <?php echo $this->renderPartial('_images',array('model'=>$model)); ?>

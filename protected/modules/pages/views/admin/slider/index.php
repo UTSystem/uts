@@ -37,12 +37,8 @@
 			array(
 				'name'=>'url',
 				'type'=>'raw',
-				'value'=>'CHtml::link(CHtml::encode($data->url), $data->getViewUrl(), array("target"=>"_blank"))',
-			),
-			array(
-				'name'=>'user_id',
-				'type'=>'raw',
-				'value'=>'$data->author->getUpdateLink()',
+				'value'=>'CHtml::link(CHtml::encode($data->id), array("/pages/admin/slider/update", "id"=>$data->id))',
+				
 			),
 			'publish_date',
 			// Buttons

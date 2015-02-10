@@ -1,6 +1,4 @@
 <?php
-Yii::import('application.modules.pages.models.components.SliderImageSaver');
-
 /**
  * This is the model class for table "Slider".
  *
@@ -37,17 +35,7 @@ class Slider extends BaseModel
 	/**
 	 * Multilingual attrs
 	 */
-	public $title;
-	public $short_description;
-	public $full_description;
-	public $meta_title;
-	public $meta_description;
-	public $meta_keywords;
-
-	/**
-	 * Name of the translations model.
-	 */
-	public $translateModelName = 'PageTranslate';
+	public $old_name;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -76,30 +64,7 @@ class Slider extends BaseModel
 	public function scopes()
 	{
 		return array(
-			'published'=>array(
-				'condition'=>'publish_date <= :date AND status = :status',
-				'params'=>array(
-					':date'=>date('Y-m-d H:i:s'),
-					':status'=>$this->publishStatus
-				),
-			),
 		);
-	}
-
-	/**
-	 * Find page by url.
-	 * Scope.
-	 * @param string Page url
-	 * @return Page
-	 */
-	public function withUrl($url)
-	{
-		$this->getDbCriteria()->mergeWith(array(
-			'condition'=>'url=:url',
-			'params'=>array(':url'=>$url)
-		));
-
-		return $this;
 	}
 
 	/**
@@ -112,9 +77,9 @@ class Slider extends BaseModel
 			array('url', 'required'),
 			array('url', 'LocalUrlValidator'),
 			array('url', 'length', 'max'=>255),
-			array('image', 'safe'),
+			array('old_name, new_name', 'safe'),
 			// The following rule is used by search().
-			array('id, user_id, title, url, caption, image, created, updated, publish_date', 'safe', 'on'=>'search'),
+			array('id, user_id, title, url, caption, created, updated, publish_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -124,7 +89,7 @@ class Slider extends BaseModel
 	public function relations()
 	{
 		return array(
-			'author'=>array(self::BELONGS_TO, 'User', 'user_id'),
+			
 		);
 	}
 
@@ -134,7 +99,16 @@ class Slider extends BaseModel
 	public function behaviors()
 	{
 		return array(
-		);
+            // наше поведение для работы с файлом
+            'uploadableFile'=>array(
+                'class'=>'application.modules.pages.behaviors.UploadableFileBehavior',
+				'attributeName' => 'old_name',
+				'savePathAlias' => 'webroot.uploads.slider',
+				'fileTypes' => 'jpg, jpeg, png, gif, csv, doc, docx, xls, xlsx, odt, pdf',
+				'maxSize' => 80240000, // 80 мб
+				'upload_model' => 'Slider' // модель откуда приходит форма
+            )
+        );
 	}
 
 	/**
@@ -148,10 +122,6 @@ class Slider extends BaseModel
 			'title' => Yii::t('PagesModule.core', 'Наименование'),
 			'url' => Yii::t('PagesModule.core', 'URL'),
 			'caption' => Yii::t('PagesModule.core', 'Текст на картинке'),
-			'full_description' => Yii::t('PagesModule.core', 'Содержание'),
-			'meta_title' => Yii::t('PagesModule.core', 'Meta Title'),
-			'meta_description' => Yii::t('PagesModule.core', 'Meta Description'),
-			'meta_keywords' => Yii::t('PagesModule.core', 'Meta Keywords'),
 			'created' => Yii::t('PagesModule.core', 'Дата создания'),
 			'updated' => Yii::t('PagesModule.core', 'Дата обновления'),
 			'publish_date' => Yii::t('PagesModule.core', 'Дата публикации'),
@@ -192,10 +162,7 @@ class Slider extends BaseModel
 	{
 		$criteria=new CDbCriteria;
 
-		$criteria->with = array('author');
-
 		$criteria->compare('t.id',$this->id);
-		$criteria->compare('author.username',$this->user_id,true);
 		$criteria->compare('t.url',$this->url,true);
 		$criteria->compare('t.created',$this->created,true);
 		$criteria->compare('t.updated',$this->updated,true);
@@ -215,54 +182,5 @@ class Slider extends BaseModel
 				'pageSize'=>20,
 			)
 		));
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function beforeSave23()
-	{
-		if(!$this->created && $this->isNewRecord)
-			$this->created = date('Y-m-d H:i:s');
-		if(!$this->updated)
-			$this->updated = date('Y-m-d H:i:s');
-
-		if (!Yii::app()->user->isGuest)
-			$this->user_id = Yii::app()->user->id;
-
-		if (empty($this->url))
-		{
-			// Create slug
-			Yii::import('ext.SlugHelper.SlugHelper');
-			$this->url = SlugHelper::run($this->title);
-		}
-
-		// Check if url available
-		if($this->isNewRecord)
-		{
-			$test = Page::model()
-				->withUrl($this->url)
-				->count();
-		}
-		else
-		{
-			$test = Page::model()
-				->withUrl($this->url)
-				->count('id!=:id', array(':id'=>$this->id));
-		}
-
-		if ($test > 0)
-			$this->url .= '-'.date('YmdHis');
-
-		return parent::beforeSave();
-	}
-
-	/**
-	 * Get url to view object on front
-	 * @return string
-	 */
-	public function getViewUrl()
-	{
-		return Yii::app()->createUrl('pages/pages/view', array('url'=>$this->url));
 	}
 }
