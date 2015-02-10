@@ -42,6 +42,14 @@ return array(
 				'full_description'=>array(
 					'type'=>'SRichTextarea',
 				),
+				'is_leader'=>array(
+					'type'=>'dropdownlist',
+					'items'=>array(
+						0=>Yii::t('StoreModule.admin', 'Нет'),
+						1=>Yii::t('StoreModule.admin', 'Да')
+					),
+					'hint'=>Yii::t('StoreModule.admin', 'Отображать в блоке "Лидеры продаж"')
+				),
 			),
 		),
 		'warehouse'=>array(

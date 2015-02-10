@@ -114,11 +114,15 @@ class StoreProduct extends BaseModel
 	public function scopes()
 	{
 		$alias = $this->getTableAlias(true);
+
 		return array(
 			'active'=>array(
 				'condition'=>$alias.'.is_active=1',
 			),
 			'newest'=>array('order'=>$alias.'.created DESC'),
+			'leaders'=>array(
+				'condition'=>$alias.'.is_leader=1',
+			),
 			'byViews'=>array('order'=>$alias.'.views_count DESC'),
 			'byAddedToCart'=>array('order'=>$alias.'.added_to_cart_count DESC'),
 		);
@@ -132,7 +136,7 @@ class StoreProduct extends BaseModel
 		return array(
 			array('price', 'commaToDot'),
 			array('price, type_id, manufacturer_id, main_category_id', 'numerical'),
-			array('is_active', 'boolean'),
+			array('is_active, is_leader', 'boolean'),
 			array('use_configurations', 'boolean', 'on'=>'insert'),
 			array('quantity, availability, manufacturer_id', 'numerical', 'integerOnly'=>true),
 			array('name, price', 'required'),
@@ -304,6 +308,7 @@ class StoreProduct extends BaseModel
 			'updated'                => Yii::t('StoreModule.core', 'Дата обновления'),
 			'discount'               => Yii::t('StoreModule.core', 'Скидка'),
 			'main_category_id'       => Yii::t('StoreModule.core', 'Категория'),
+			'is_leader'      		 => Yii::t('StoreModule.core', 'Лидеры продаж'),
 		);
 	}
 

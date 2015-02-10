@@ -14,7 +14,7 @@ class IndexController extends Controller
 	public function actionIndex()
 	{
 		$this->render('index', array(
-			'popular' => $this->getPopular(4),
+			'leaders' => $this->getLeaders(4),
 			'newest'  => $this->getNewest(4),
 			'news'    => Page::model()->published()->filterByCategory(7)->findAll(array('limit'=>3))
 		));
@@ -83,4 +83,15 @@ class IndexController extends Controller
 			->findAll(array('limit'=>$limit));
 	}
 
+	/**
+	 * @param $limit
+	 * @return array
+	 */
+	protected function getLeaders($limit)
+	{
+		return StoreProduct::model()
+			->active()
+			->leaders()
+			->findAll(array('limit'=>$limit));
+	}
 }

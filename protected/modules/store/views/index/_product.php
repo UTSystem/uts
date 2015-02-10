@@ -42,10 +42,11 @@
 				}
 				else
 				{
-					echo CHtml::link('Нет в наличии', '#', array(
+					echo '<p class="error">Нет в наличии</p>';
+					/*echo CHtml::link('Нет в наличии', '#', array(
 						'onclick' => 'showNotifierPopup('.$data->id.'); return false;',
 						'class'   => 'notify_link',
-					));
+					));*/
 				}
 			?>
 			<?php echo CHtml::endForm() ?>
