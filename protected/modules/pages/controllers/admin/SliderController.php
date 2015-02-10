@@ -73,7 +73,7 @@ class SliderController extends SAdminController {
 				if ($model->image){				
 					//сохранить файл на сервере в каталог images/2011 под именем 
 					//month-day-alias.jpg
-					$file = $_SERVER['DOCUMENT_ROOT'].Yii::app()->urlManager->baseUrl.'/uploads/slider/'.$fileName;
+					$file = Yii::getPathOfAlias('webroot.uploads').'/slider/'.$fileName;
 					$model->image->saveAs($file);
 				}
 				
