@@ -59,7 +59,7 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
             $this->owner->setAttribute($this->attributeName, $file->name);
             $this->owner->setAttribute('new_name', $new_name);
             
-			if(!$file->saveAs($this->getSavePath().$new_name)) $this->owner->addError('Произошла ошибка при сохранении файла!');
+			if(!$file->saveAs($this->getSavePath().$new_name)) $this->owner->addError($this->attributeName, 'Произошла ошибка при сохранении файла!');
         } 
 		else
 		{
