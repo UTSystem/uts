@@ -28,3 +28,5 @@ $this->pageHeader = $title;
 	<?php echo $form; ?>
 </div>
 
+<?php echo $this->renderPartial('_images',array('model'=>$model)); ?>
+
