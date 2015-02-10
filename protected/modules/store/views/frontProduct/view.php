@@ -76,7 +76,12 @@ if($model->mainCategory)
 						<?php echo StoreProduct::formatPrice($model->toCurrentCurrency()); ?>
 						<?php echo Yii::app()->currency->active->symbol; ?>
 					</span>
-					<p><?php echo StoreProduct::getAvailabilityItems()[$model->availability]; ?></p>
+					<p>
+						<?php 
+							$getAvailabilityItems=StoreProduct::getAvailabilityItems();
+							echo $getAvailabilityItems[$model->availability]; 
+						?>
+					</p>
 					<?php
 						echo CHtml::form(array('/orders/cart/add'));
 						echo CHtml::hiddenField('product_id', $model->id);
