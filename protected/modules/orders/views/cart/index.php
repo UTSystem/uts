@@ -44,12 +44,13 @@ if(empty($items))
 			</td>
 			<td class="description">
 				<?php echo CHtml::link(CHtml::encode($product['model']->name), array('/store/frontProduct/view', 'url'=>$product['model']->url)); ?>
-				<span>Артикул: АА 2703823</span>
-				<ul>
-					<li>Размер: евро <a href="#">изменить</a></li>
-					<li>Ткань: сатин</li>
-					<li>Цвет: синий <a href="#">изменить</a></li>
-				</ul>
+				<!--<span>Артикул: АА 2703823</span>-->
+				<?php 
+					$attributes = $product['model']->getEavAttributes();
+					if(!empty($attributes))
+						$attributes_html = $this->renderPartial('../../../store/views/frontProduct/_attributesdl', array('model'=>$product['model']), true);
+					echo $attributes_html;
+				?>
 				
 				<?php 
 					$getAvailabilityItems=StoreProduct::getAvailabilityItems();
@@ -91,5 +92,68 @@ if(empty($items))
 				<button class="btn btn-info" type="submit" name="create" value="1">Оформить заказ</button>
 			</td>
 		</tr>
-	</table>	
+	</table>
+
+<div class="order_data">
+	<div class="left">
+		<div class="delivery rc5">
+			<h2>Способ доставки</h2>
+			<ul>
+				<?php foreach($deliveryMethods as $delivery): ?>
+				<li>
+					<label class="radio">
+						<?php
+						echo CHtml::activeRadioButton($this->form, 'delivery_id', array(
+							'checked'        => ($this->form->delivery_id == $delivery->id),
+							'uncheckValue'   => null,
+							'value'          => $delivery->id,
+							'data-price'     => Yii::app()->currency->convert($delivery->price),
+							'data-free-from' => Yii::app()->currency->convert($delivery->free_from),
+							'onClick'        => 'recountOrderTotalPrice(this);',
+						));
+						?>
+						<span><?php echo CHtml::encode($delivery->name) ?></span>
+					</label>
+					<p><?=$delivery->description?></p>
+				</li>
+				<?php endforeach; ?>
+		</div>
+	</div>
+
+	<div class="user_data rc5">
+		<h2>Адрес получателя</h2>
+
+		<div class="form wide">
+			<?php echo CHtml::errorSummary($this->form); ?>
+
+			<div class="row">
+				<?php echo CHtml::activeLabel($this->form,'name', array('required'=>true)); ?>
+				<?php echo CHtml::activeTextField($this->form,'name'); ?>
+			</div>
+
+			<div class="row">
+				<?php echo CHtml::activeLabel($this->form,'email', array('required'=>true)); ?>
+				<?php echo CHtml::activeTextField($this->form,'email'); ?>
+			</div>
+
+			<div class="row">
+				<?php echo CHtml::activeLabel($this->form,'phone'); ?>
+				<?php echo CHtml::activeTextField($this->form,'phone'); ?>
+			</div>
+
+			<div class="row">
+				<?php echo CHtml::activeLabel($this->form,'address'); ?>
+				<?php echo CHtml::activeTextField($this->form,'address'); ?>
+			</div>
+
+			<div class="row">
+				<?php echo CHtml::activeLabel($this->form,'comment'); ?>
+				<?php echo CHtml::activeTextArea($this->form,'comment'); ?>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+	
 <?php echo CHtml::endForm() ?>	

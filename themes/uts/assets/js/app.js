@@ -115,7 +115,11 @@ function init_number ()
         {
             var is_down = $(this).is('.' + 'arr-down'),
                 val = parseInt(field.val(), 10) || 0;
-            field.val(is_down ? (val - 1) : (val + 1));
+            
+			if(is_down && val>1)
+				field.val((val - 1));
+			else if(!is_down) field.val((val + 1));
+			//field.val(is_down ? (val - 1) : (val + 1));
             numbValue.text(field.val())
         });
 
