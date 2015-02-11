@@ -21,16 +21,8 @@ class SliderController extends SAdminController {
 		));
 	}
 
-	public function actionCreate()
-	{
-		$this->actionUpdate(true);
-	}
-
-	public function actionUpdate($id) {
-        $model = $this->loadModel($id);
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+	public function actionCreate(){
+        $model = new Slider();
 
         if (Yii::app()->request->isPostRequest)
 		{
@@ -44,7 +36,7 @@ class SliderController extends SAdminController {
 				$model->created = date('Y-m-d H:i:s');
 			$model->updated = date('Y-m-d H:i:s');
             
-			if ($model->save())
+			if ($model->save(false))
 			{
 				$this->setFlashMessage(Yii::t('PagesModule.core', 'Изменения успешно сохранены'));
 
@@ -53,65 +45,31 @@ class SliderController extends SAdminController {
 				else
 					$this->redirect(array('index'));
 			}
-		else {$this->setFlashMessage(Yii::t('PagesModule.core', $model->getErrors()));}
+			else {$this->setFlashMessage(Yii::t('PagesModule.core', $model->getErrors()));}
         }
 
         $this->render('update', array(
             'model' => $model,
         ));
     }
-	
-	/**
-	 * Create or update new banner
-	 * @param boolean $new
-	 */
-	public function actionUpdate1($new = false)
-	{
-		if ($new === true)
-		{
-			$model = new Slider;
-			$model->publish_date = date('Y-m-d H:i:s');
-		}
-		else
-		{
-			$model = Slider::model()
-				->findByPk($_GET['id']);
-		}
 
-		if (!$model)
-			throw new CHttpException(404, Yii::t('PagesModule.core', 'Страница не найдена.'));
+	public function actionUpdate($id) {
+        $model = $this->loadModel($id);
 
-		$form = new CForm('application.modules.pages.views.admin.slider.sliderForm', $model);
-		
-		if (Yii::app()->request->isPostRequest)
+        if (Yii::app()->request->isPostRequest)
 		{
 			$model->attributes = $_POST['Slider'];
 
+			 $model->attachBehavior('UploadableFileBehavior', array(
+                'class'=>'application.modules.pages.behaviors.UploadableFileBehavior',
+            ));
+			
 			if ($model->isNewRecord)
 				$model->created = date('Y-m-d H:i:s');
 			$model->updated = date('Y-m-d H:i:s');
-
-			//$images = CUploadedFile::getInstancesByName('Slider');
-			
-			/*$model->image=CUploadedFile::getInstance($model,'image');
-			
-			if ($model->image){
-				$sourcePath = pathinfo($model->image->getName());	
-				$fileName = $model->id.'-slider.'.$sourcePath['extension'];
-				//$model->image = $fileName;
-			}	*/
-
-			if ($model->validate())
+            
+			if ($model->save(false))
 			{
-				$model->save();
-
-				/*if ($model->image){				
-					//сохранить файл на сервере в каталог images/2011 под именем 
-					//month-day-alias.jpg
-					$file = Yii::getPathOfAlias('webroot.uploads').'/slider/'.$fileName;
-					$model->image->saveAs($file);
-				}*/
-				
 				$this->setFlashMessage(Yii::t('PagesModule.core', 'Изменения успешно сохранены'));
 
 				if (isset($_POST['REDIRECT']))
@@ -119,13 +77,13 @@ class SliderController extends SAdminController {
 				else
 					$this->redirect(array('index'));
 			}
-		}
+			else {$this->setFlashMessage(Yii::t('PagesModule.core', $model->getErrors()));}
+        }
 
-		$this->render('update', array(
-			'model'=>$model,
-			'form'=>$form,
-		));
-	}
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
 
 	/**
 	 * Delete page by Pk
@@ -137,13 +95,30 @@ class SliderController extends SAdminController {
 			$model = Slider::model()->findAllByPk($_REQUEST['id']);
 
 			if (!empty($model))
-			{
-				foreach($model as $page)
-					$page->delete();
-			}
+				$model->delete();
 
 			if (!Yii::app()->request->isAjaxRequest)
 				$this->redirect('index');
+		}
+	}
+	
+	/**
+	 * Delete page by Pk
+	 */
+	public function actionDeleteImage()
+	{
+		if (Yii::app()->request->isPostRequest)
+		{
+			$model = Slider::model()->findByPk((int)$_REQUEST['id']);
+			$image = $model->new_name;
+			
+			if ($image!='' && file_exists(Yii::getPathOfAlias('webroot.uploads.slider') . DIRECTORY_SEPARATOR . $image))
+			{
+				if(unlink(Yii::getPathOfAlias('webroot.uploads.slider') . DIRECTORY_SEPARATOR . $image))
+				{
+					Yii::app()->db->createCommand("UPDATE slider set old_name='', new_name='' where id='".$model->id."'")->execute();
+				}
+			}
 		}
 	}
 	

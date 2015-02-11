@@ -43,7 +43,6 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
             // добавляем валидатор файла
             $fileValidator=CValidator::createValidator('file', $owner, $this->attributeName, array('types'=>$this->fileTypes, 'allowEmpty'=>false, 'maxSize'=>$this->maxSize));
 			$owner->validatorList->add($fileValidator);
-			           // print_R($owner->validatorList); die;
         }
     }
  
@@ -59,7 +58,7 @@ class UploadableFileBehavior extends CActiveRecordBehavior{
             $this->owner->setAttribute($this->attributeName, $file->name);
             $this->owner->setAttribute('new_name', $new_name);
             
-			if(!$file->saveAs($this->getSavePath().$new_name)) $this->owner->addError($this->attributeName, 'Произошла ошибка при сохранении файла!');
+			if(!$file->saveAs($this->getSavePath().$new_name)) {$this->owner->addError($this->attributeName, 'Произошла ошибка при сохранении файла!');return false;}
         } 
 		else
 		{

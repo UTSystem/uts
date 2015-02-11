@@ -57,10 +57,8 @@ class SCategoryRender extends CWidget
 	{
 		foreach($data as $key=>$node)
 		{
-			
 			if($node->id>1)
 			{
-
 				if(!$child) echo '<div class="col-md-6"><div class="media">';
 				if($child) echo CHtml::link(CHtml::encode($node->name), array(Yii::app()->createUrl($node->privateGet('full_path'))));
 				if(!$child) echo CHtml::link('<img alt="..." src="'.Yii::app()->theme->baseUrl.'/assets/images/category-item.jpg">', array(), array('class'=>'media-left'));
@@ -81,8 +79,7 @@ class SCategoryRender extends CWidget
 				}
 				if(!$child)	echo '</div></div>';
 			}
-			else $this->createHtmlTree($node['children']);
-			
+			else $this->createHtmlTree($node['children']);	
 		}
 	}
 }
