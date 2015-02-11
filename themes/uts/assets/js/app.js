@@ -94,7 +94,7 @@ function init_number ()
  * author of this "implementation" method - Tabasov.K
  */
 {
-    $('input').each(function(){
+    $('inpu123t').each(function(){
 
         var field = $(this);
         //console.log(field)

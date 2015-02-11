@@ -22,7 +22,7 @@ if(empty($items))
 ?>
 
 <?php echo CHtml::form() ?>
-<table width="100%">
+<table width="100%" id='cart_table'>
 	<tr>
 		<th>Товар</th>
 		<th>&nbsp;</th>
@@ -31,7 +31,7 @@ if(empty($items))
 		<th class="th-total">Стоимость</th>
 	</tr>
 	<?php foreach($items as $index=>$product): ?>
-		<tr>
+		<tr id='cart_<?php echo $index;?>'>
 			<td width="110px" align="center">
 				<?php
 					// Display image
@@ -60,7 +60,32 @@ if(empty($items))
 				?>
 			</td>
 			<td valign="top">
-				<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
+				<span class="number-wrap">
+					<span class="arr-down" role="ArrDown">
+						<?php
+							echo CHtml::Ajaxlink('-', array('/cart/CountDown/'.$index), array('class'=>'price-extend delete',
+								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'success' => "function(data)
+								{
+									$('#cart_table').html(data);
+								}",
+							)); 
+						?>
+					</span>
+					<span class="numb-value"><?php echo $product['quantity'];?></span>
+					<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
+					<span class="arr-up" role="ArrUp">
+						<?php 
+							echo CHtml::Ajaxlink('+', array('/cart/CountUp/'.$index), array('class'=>'price-extend delete',
+								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'success' => "function(data)
+								{
+									$('#cart_table').html(data);
+								}",
+							));
+						?>
+					</span>
+				</span>
 			</td>
 			<td class="price" valign="top">
 				<?php
@@ -78,7 +103,13 @@ if(empty($items))
 							echo CHtml::closeTag('span');
 						?>
 					</span>
-					<?php echo CHtml::link('<i>Удалить</i>', array('/orders/cart/remove', 'index'=>$index), array('class'=>'price-extend delete')) ?>
+					<?php echo CHtml::Ajaxlink('<i>Удалить</i>', array('/orders/cart/remove', 'index'=>$index), array('class'=>'price-extend delete',
+					'success' => "function(data)
+					{
+						$('#cart_table').html(data);
+						if(data.length<30) $('.order_data').html('');
+					}",
+					)) ?>
 				</div>
 			</td>
 		</tr>
@@ -152,8 +183,5 @@ if(empty($items))
 			</div>
 		</div>
 	</div>
-
 </div>
-
-	
 <?php echo CHtml::endForm() ?>	

@@ -145,8 +145,57 @@ class CartController extends Controller
 
 		if(!Yii::app()->request->isAjaxRequest)
 			Yii::app()->request->redirect($this->createUrl('index'));
+		else
+			$this->renderPartial('ajaxtable', array(
+				'items'           => Yii::app()->cart->getDataWithModels(),
+				'totalPrice'      => Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())
+			));
+		
+	}
+	
+	/**
+	 * Up product quantity
+	 */
+	public function	actionCountUp($index)
+	{
+
+		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount') && !empty($_REQUEST['quantities']))
+		{
+			$quantities[$index]=Yii::app()->request->getParam('quantities')+1;
+			Yii::app()->cart->recount($quantities);
+		}
+
+		if(!Yii::app()->request->isAjaxRequest)
+			Yii::app()->request->redirect($this->createUrl('index'));
+		else
+			$this->renderPartial('ajaxtable', array(
+				'items'           => Yii::app()->cart->getDataWithModels(),
+				'totalPrice'      => Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())
+			));
+		
 	}
 
+	/**
+	 * Down product quantity
+	 */
+	public function actionCountDown($index)
+	{
+		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount') && !empty($_REQUEST['quantities']))
+		{
+			$quantities[$index]=Yii::app()->request->getParam('quantities')-1;
+			Yii::app()->cart->recount($quantities);
+		}
+
+		if(!Yii::app()->request->isAjaxRequest)
+			Yii::app()->request->redirect($this->createUrl('index'));
+		else
+			$this->renderPartial('ajaxtable', array(
+				'items'           => Yii::app()->cart->getDataWithModels(),
+				'totalPrice'      => Yii::app()->currency->convert(Yii::app()->cart->getTotalPrice())
+			));
+		
+	}
+	
 	/**
 	 * Clear cart
 	 */
