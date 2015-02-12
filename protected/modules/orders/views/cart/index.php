@@ -68,6 +68,7 @@ if(empty($items))
 								'success' => "function(data)
 								{
 									$('#cart_table').html(data);
+									reloadSmallCart();
 								}",
 							), array('id'=>'down_'.$index)); 
 						?>
@@ -81,6 +82,7 @@ if(empty($items))
 								'success' => "function(data)
 								{
 									$('#cart_table').html(data);
+									reloadSmallCart()
 								}",
 							), array('id'=>'up_'.$index));
 						?>
@@ -107,7 +109,8 @@ if(empty($items))
 					'success' => "function(data)
 					{
 						$('#cart_table').html(data);
-						if(data.length<30) $('.order_data').html('');
+						if(data.length<30) $('#order_data').html('');
+						reloadSmallCart();
 					}",
 					)) ?>
 				</div>
