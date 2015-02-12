@@ -253,7 +253,8 @@ class CartController extends Controller
 		$order->user_corp  = $this->form->user_corp;
 		$order->user_stro  = $this->form->user_stro;
 		$order->user_floor  = $this->form->user_floor;
-		$order->user_delivery_comment  = $this->form->user_delivery_comment;
+		$order->delivery_date  = $this->form->delivery_date;
+		$order->delivery_time  = $this->form->delivery_time;
 
 		if($order->validate())
 			$order->save();

@@ -22,6 +22,8 @@ class OrderCreateForm extends CFormModel
 	public $user_stro;
 	public $user_floor;
 	public $user_delivery_comment;
+	public $delivery_date;
+	public $delivery_time;
 
 	public function init()
 	{
@@ -49,7 +51,7 @@ class OrderCreateForm extends CFormModel
 			array('email', 'length', 'max'=>'100'),
 			array('phone', 'length', 'max'=>'30'),
 			array('user_city', 'length', 'max'=>'255'),
-			array('user_city, user_index, user_street, user_house, user_appartaments, user_corp, user_stro, user_floor, user_delivery_comment', 'safe'),
+			array('user_city, user_index, user_street, user_house, user_appartaments, user_corp, user_stro, user_floor, user_delivery_comment, delivery_date, delivery_time', 'safe'),
 			array('delivery_id', 'validateDelivery'),
 		);
 	}
