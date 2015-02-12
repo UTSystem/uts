@@ -123,7 +123,22 @@ if(empty($items))
 				<button class="btn btn-info" type="submit" name="create" value="1">Оформить заказ</button>
 			</td>
 		</tr>
-	</table>
+</table>
+
+
+
+<div id="order_data" class="panel-group">
+	<?php //if(Yii::app()->user->isGuest)	$this->renderPartial('_steps/auth'); ?>
+	<?php $this->renderPartial('_steps/auth'); ?>
+	<?php $this->renderPartial('_steps/contacts'); ?>
+	<?php $this->renderPartial('_steps/delivery'); ?>
+	<?php $this->renderPartial('_steps/date'); ?>
+	<?php //$this->renderPartial('_steps/confirm'); ?>
+</div>
+
+
+	
+
 
 <div class="order_data">
 	<div class="left">

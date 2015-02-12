@@ -33,6 +33,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/app2.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/category.css" rel="stylesheet">
 	<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/common.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
