@@ -31,7 +31,7 @@
 <?php else: ?>
 <script>
 	$('#not_register').on('click', function() {
-		$('#collapseAuth').collapse('hide');
+		$('.collapse').collapse('hide');
 		$('#collapseContacts').collapse('show');
 		return false;
     });

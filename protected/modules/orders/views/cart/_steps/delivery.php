@@ -59,7 +59,7 @@
 
 <script>
 	$('#cart_delivery_continue').on('click', function() {
-		$('#collapseDelivery').collapse('hide');
+		$('.collapse').collapse('hide');
 		$('#collapseDate').collapse('show');
 		return false;
     });

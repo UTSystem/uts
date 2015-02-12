@@ -27,7 +27,7 @@
 
 <script>
 	$('#cart_contacts_continue').on('click', function() {
-		$('#collapseContacts').collapse('hide');
+		$('.collapse').collapse('hide');
 		$('#collapseDelivery').collapse('show');
 		return false;
     });

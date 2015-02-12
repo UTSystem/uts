@@ -40,7 +40,7 @@ else $delivery_time = '10:00';
 	$('#delivery_time').timepicker({'timeFormat': 'H:i'});
 
 	$('#cart_date_continue').on('click', function() {
-		$('#collapseDate').collapse('hide');
+		$('.collapse').collapse('hide');
 		$('#collapseConfirm').collapse('show');
 		return false;
     });
