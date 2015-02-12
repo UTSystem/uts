@@ -69,7 +69,7 @@ if(empty($items))
 								{
 									$('#cart_table').html(data);
 								}",
-							)); 
+							), array('id'=>'down_'.$index)); 
 						?>
 					</span>
 					<span class="numb-value"><?php echo $product['quantity'];?></span>
@@ -82,7 +82,7 @@ if(empty($items))
 								{
 									$('#cart_table').html(data);
 								}",
-							));
+							), array('id'=>'up_'.$index));
 						?>
 					</span>
 				</span>

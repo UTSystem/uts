@@ -47,7 +47,32 @@ if(empty($items))
 				?>
 			</td>
 			<td valign="top">
-				<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
+				<span class="number-wrap">
+					<span class="arr-down" role="ArrDown">
+						<?php
+							echo CHtml::Ajaxlink('-', array('/cart/CountDown/'.$index), array('class'=>'price-extend delete',
+								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'success' => "function(data)
+								{
+									$('#cart_table').html(data);
+								}",
+							), array('id'=>'down_'.$index)); 
+						?>
+					</span>
+					<span class="numb-value"><?php echo $product['quantity'];?></span>
+					<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
+					<span class="arr-up" role="ArrUp">
+						<?php 
+							echo CHtml::Ajaxlink('+', array('/cart/CountUp/'.$index), array('class'=>'price-extend delete',
+								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'success' => "function(data)
+								{
+									$('#cart_table').html(data);
+								}",
+							), array('id'=>'up_'.$index));
+						?>
+					</span>
+				</span>
 			</td>
 			<td class="price" valign="top">
 				<?php
