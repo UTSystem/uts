@@ -1,8 +1,8 @@
-<fieldset class="sel">
-	
-	<a href="#collapseContacts" data-parent="#order_data" data-toggle="collapse" class="">
+<fieldset class="panel">
+    <a href="#collapseContacts" data-parent="#order_data" data-toggle="collapse" class="">
 		<legend>Контактные данные</legend>
 	</a>
+	
 	<div class="panel-collapse collapse" id="collapseContacts" style="height: auto; width: 392px">
 		<span>Укажите контактные данные человека, который будет получать заказ</span>
 
@@ -21,14 +21,7 @@
 			<?php echo CHtml::activeTextArea($this->form,'comment', array('placeholder'=>"Примечание")); ?>
 		</div>
 
-		<a href="#" class="btn-flat" id="cart_contacts_continue">Продолжить</a>
-	</div>
+		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDelivery" class="btn-flat">Продолжить</button>
+		<!--<a href="#" class="btn-flat" id="cart_contacts_continue">Продолжить</a>-->
+    </div>
 </fieldset>
-
-<script>
-	$('#cart_contacts_continue').on('click', function() {
-		$('.collapse').collapse('hide');
-		$('#collapseDelivery').collapse('show');
-		return false;
-    });
-</script>

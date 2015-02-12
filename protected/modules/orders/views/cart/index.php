@@ -125,7 +125,6 @@ if(empty($items))
 		</tr>
 </table>
 
-
 <?php echo CHtml::errorSummary($this->form); ?>
 <div id="order_data" class="panel-group">
 	<?php $this->renderPartial('_steps/auth'); ?>
@@ -134,4 +133,4 @@ if(empty($items))
 	<?php $this->renderPartial('_steps/date'); ?>
 	<?php //$this->renderPartial('_steps/confirm'); ?>
 </div>
-<?php echo CHtml::endForm() ?>	
+<?php echo CHtml::endForm() ?>

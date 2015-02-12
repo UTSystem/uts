@@ -1,8 +1,9 @@
-<fieldset class="normal">
-	<a href="#collapseAuth" data-parent="#order_data" data-toggle="collapse" class="">
+<fieldset class="panel">
+    <a href="#collapseAuth" data-parent="#order_data" data-toggle="collapse">
 		<legend>Авторизация</legend>
-	</a>
-	<div class="panel-collapse collapse in" id="collapseAuth" style="height: auto; ">
+	</a>   
+	
+    <div class="panel-collapse collapse in" id="collapseAuth" style="height: auto; ">
 		<div class="left">
 			<span class="pseudo-title">Войти с учетной записью</span>
 			<div class="form-group">
@@ -19,7 +20,10 @@
 
 		<div class="buy-type">
 			<div><a href="/users/register" class="btn btn-info">зарегестрироваться</a><p>Получайте бонусы, экономте деньги и время при следующих покупках<br/> Регистрация займет не более 2-х минут</p></div>
-			<div><a href="#" id="not_register" class="btn btn-gray">Купить без регистрации</a><p>При следующей покупке необходимо заполнять контктные данные и адрес доставки<br/>Незарегистрированные пользователи не могу пользоваться бонусами и накопительными скидками</p></div>
+			<div>
+			<!--<a href="#" id="not_register" data-toggle="collapse" data-parent="#order_data" href="#collapseAuth" class="btn btn-gray">Купить без регистрации</a>-->
+			<button data-toggle="collapse" data-parent="#order_data" href="#collapseContacts" class="btn btn-gray">Купить без регистрации</button>
+			<p>При следующей покупке необходимо заполнять контктные данные и адрес доставки<br/>Незарегистрированные пользователи не могу пользоваться бонусами и накопительными скидками</p></div>
 		</div>
 	</div>
 </fieldset>
@@ -28,12 +32,23 @@
 <script>
 	$('#collapseAuth').html('');
 </script>
-<?php else: ?>
-<script>
-	$('#not_register').on('click', function() {
-		$('.collapse').collapse('hide');
-		$('#collapseContacts').collapse('show');
-		return false;
-    });
-</script>
 <?php endif; ?>
+
+<style>
+.panel{
+	box-shadow: none;
+	margin-top: 0px !important;
+}
+
+.panel-group .panel {
+    border-radius: 0px;
+    margin: 0;
+    margin-top: 0px !important;
+}
+
+fieldset
+{
+	border-top:0 !important;
+	border-bottom:0 !important;
+}
+</style>

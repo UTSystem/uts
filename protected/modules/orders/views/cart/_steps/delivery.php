@@ -1,4 +1,4 @@
-<fieldset class="empty">
+<fieldset class="panel">
 	<a href="#collapseDelivery" data-parent="#order_data" data-toggle="collapse" class="">
 		<legend>Способ получения заказа и адрес доставки</legend>
 	</a>
@@ -53,14 +53,15 @@
 				</div>
 			</div>
 		</div>
-		<a href="#" id="cart_delivery_continue" class="btn-flat">Продолжить</a>
+		<!--<a href="#" id="cart_delivery_continue" class="btn-flat">Продолжить</a>-->
+		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDate" class="btn-flat">Продолжить</button>
 	</div>
 </fieldset>
 
 <script>
-	$('#cart_delivery_continue').on('click', function() {
+	/*$('#cart_delivery_continue').on('click', function() {
 		$('.collapse').collapse('hide');
 		$('#collapseDate').collapse('show');
 		return false;
-    });
+    });*/
 </script>

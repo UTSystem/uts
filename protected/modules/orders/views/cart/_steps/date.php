@@ -11,7 +11,7 @@ if ($_POST['OrderCreateForm']['delivery_time'])	$delivery_time = $_POST['OrderCr
 else $delivery_time = '10:00';
 
 ?>
-<fieldset>
+<fieldset class="panel">
 	<a href="#collapseDate" data-parent="#order_data" data-toggle="collapse" class="">
 		<legend>Дата и стоимость доставки</legend>
 	</a>
@@ -27,7 +27,8 @@ else $delivery_time = '10:00';
 		</div>
 
 		<p class="preview-price"><strong>Стоимость доставки:</strong> 2000 рублей</p>
-		<a href="#" id="cart_date_continue" class="btn btn-info">Продолжить</a>
+		<!--<a href="#" id="cart_date_continue" class="btn btn-info">Продолжить</a>-->
+		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDate" class="btn btn-info">Продолжить</button>
 	</div>
 </fieldset>
 
@@ -38,10 +39,4 @@ else $delivery_time = '10:00';
     }).data('datepicker');
 	
 	$('#delivery_time').timepicker({'timeFormat': 'H:i'});
-
-	$('#cart_date_continue').on('click', function() {
-		$('.collapse').collapse('hide');
-		$('#collapseConfirm').collapse('show');
-		return false;
-    });
 </script>
