@@ -242,9 +242,18 @@ class CartController extends Controller
 		$order->user_name    = $this->form->name;
 		$order->user_email   = $this->form->email;
 		$order->user_phone   = $this->form->phone;
-		$order->user_address = $this->form->address;
 		$order->user_comment = $this->form->comment;
 		$order->delivery_id  = $this->form->delivery_id;
+
+		$order->user_city  = $this->form->user_city;
+		$order->user_index  = $this->form->user_index;
+		$order->user_street  = $this->form->user_street;
+		$order->user_house  = $this->form->user_house;
+		$order->user_appartaments  = $this->form->user_appartaments;
+		$order->user_corp  = $this->form->user_corp;
+		$order->user_stro  = $this->form->user_stro;
+		$order->user_floor  = $this->form->user_floor;
+		$order->user_delivery_comment  = $this->form->user_delivery_comment;
 
 		if($order->validate())
 			$order->save();

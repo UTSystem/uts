@@ -10,9 +10,18 @@ class OrderCreateForm extends CFormModel
 	public $name;
 	public $email;
 	public $phone;
-	public $address;
+	//public $address;
 	public $comment;
 	public $delivery_id;
+	public $user_city;
+	public $user_index;
+	public $user_street;
+	public $user_house;
+	public $user_appartaments;
+	public $user_corp;
+	public $user_stro;
+	public $user_floor;
+	public $user_delivery_comment;
 
 	public function init()
 	{
@@ -21,7 +30,7 @@ class OrderCreateForm extends CFormModel
 			$profile=Yii::app()->user->getModel()->profile;
 			$this->name=$profile->full_name;
 			$this->phone=$profile->phone;
-			$this->address=$profile->delivery_address;
+			//$this->address=$profile->delivery_address;
 			$this->email=Yii::app()->user->email;
 		}
 	}
@@ -36,9 +45,11 @@ class OrderCreateForm extends CFormModel
 			array('name, email', 'required'),
 			array('email', 'email'),
 			array('comment', 'length', 'max'=>'500'),
-			array('address', 'length', 'max'=>'255'),
+			//array('address', 'length', 'max'=>'255'),
 			array('email', 'length', 'max'=>'100'),
 			array('phone', 'length', 'max'=>'30'),
+			array('user_city', 'length', 'max'=>'255'),
+			array('user_city, user_index, user_street, user_house, user_appartaments, user_corp, user_stro, user_floor, user_delivery_comment', 'safe'),
 			array('delivery_id', 'validateDelivery'),
 		);
 	}
@@ -49,9 +60,10 @@ class OrderCreateForm extends CFormModel
 			'name'        => Yii::t('OrdersModule.core', 'Имя'),
 			'email'       => Yii::t('OrdersModule.core', 'Email'),
 			'comment'     => Yii::t('OrdersModule.core', 'Комментарий'),
-			'address'     => Yii::t('OrdersModule.core', 'Адрес доставки'),
+			//'address'     => Yii::t('OrdersModule.core', 'Адрес доставки'),
 			'phone'       => Yii::t('OrdersModule.core', 'Номер телефона'),
 			'delivery_id' => Yii::t('OrdersModule.core', 'Способ доставки'),
+			'user_city' => Yii::t('OrdersModule.core', 'Город'),
 		);
 	}
 

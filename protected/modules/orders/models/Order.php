@@ -61,6 +61,7 @@ class Order extends BaseModel
 			array('delivery_id', 'validateDelivery'),
 			array('status_id', 'validateStatus'),
 			array('paid', 'boolean'),
+			array('user_city, user_index, user_street, user_house, user_appartaments, user_corp, user_stro, user_floor, user_delivery_comment', 'safe'),
 			// Search
 			array('id, user_id, delivery_id, delivery_price, total_price, status_id, paid, user_name, user_email, user_address, user_phone, user_comment, ip_address, created, updated', 'safe', 'on'=>'search'),
 		);
@@ -405,7 +406,6 @@ class Order extends BaseModel
 		$criteria->compare('paid',$this->paid);
 		$criteria->compare('user_name',$this->user_name,true);
 		$criteria->compare('user_email',$this->user_email,true);
-		$criteria->compare('user_address',$this->user_address,true);
 		$criteria->compare('user_phone',$this->user_phone,true);
 		$criteria->compare('user_comment',$this->user_comment,true);
 		$criteria->compare('ip_address',$this->ip_address,true);

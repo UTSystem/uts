@@ -15,21 +15,23 @@
 			<div class="tab-pane fade in active" id="courier">
 				<legend class="sub">Адрес доставки</legend>
 				<div class="form-group-address form-group">
-					<input type="text" class="city" placeholder="Город">
-					<input type="text" class="index" placeholder="Индекс">
-					<input type="text" class="street" placeholder="Улица">
-					<input type="text" class="house" placeholder="Дом">
-					<input type="text" class="appartaments" placeholder="Квартира">
-					<input type="text" class="corp" placeholder="Корпус">
-					<input type="text" class="stro" placeholder="Строение">
-					<input type="text" class="floor" placeholder="Этаж">
-					<textarea placeholder="Здесь можно указать код домофона или любую другую информацию, которая будет полезна для курьерской службы"></textarea>
+					<?php echo CHtml::activeHiddenField($this->form, 'delivery_id', array('value'=>'14')); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_city', array('class'=>'city', 'placeholder'=>"Город")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_index', array('class'=>'index', 'placeholder'=>"Индекс")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_street', array('class'=>'street', 'placeholder'=>"Улица")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_house', array('class'=>'house', 'placeholder'=>"Дом")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_corp', array('class'=>'corp', 'placeholder'=>"Корпус")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_stro', array('class'=>'stro', 'placeholder'=>"Строение")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_appartaments', array('class'=>'appartaments', 'placeholder'=>"Квартира")); ?>
+					<?php echo CHtml::activeTextField($this->form, 'user_floor', array('class'=>'floor', 'placeholder'=>"Этаж")); ?>
+					<?php echo CHtml::activeTextArea($this->form, 'user_delivery_comment', array('placeholder'=>"Здесь можно указать код домофона или любую другую информацию, которая будет полезна для курьерской службы")); ?>
 				</div>
 			</div>
 
 			<div class="tab-pane fade" id="myself">
 				<legend class="sub">Пункты самовывоза</legend>
 				<div class="map-area">
+					<?php echo CHtml::activeHiddenField($this->form, 'delivery_id', array('value'=>'15')); ?>
 					<a href="#" class="address act"><span>г. Москва, ул. Марии Расковой, 27</span></a>
 					<div class="media">
 						<span class="media-left">

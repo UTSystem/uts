@@ -126,76 +126,12 @@ if(empty($items))
 </table>
 
 
-
+<?php echo CHtml::errorSummary($this->form); ?>
 <div id="order_data" class="panel-group">
 	<?php $this->renderPartial('_steps/auth'); ?>
 	<?php $this->renderPartial('_steps/contacts'); ?>
 	<?php $this->renderPartial('_steps/delivery'); ?>
 	<?php $this->renderPartial('_steps/date'); ?>
 	<?php //$this->renderPartial('_steps/confirm'); ?>
-</div>
-
-
-	
-
-
-<div class="order_data">
-	<div class="left">
-		<div class="delivery rc5">
-			<h2>Способ доставки</h2>
-			<ul>
-				<?php foreach($deliveryMethods as $delivery): ?>
-				<li>
-					<label class="radio">
-						<?php
-						echo CHtml::activeRadioButton($this->form, 'delivery_id', array(
-							'checked'        => ($this->form->delivery_id == $delivery->id),
-							'uncheckValue'   => null,
-							'value'          => $delivery->id,
-							'data-price'     => Yii::app()->currency->convert($delivery->price),
-							'data-free-from' => Yii::app()->currency->convert($delivery->free_from),
-							'onClick'        => 'recountOrderTotalPrice(this);',
-						));
-						?>
-						<span><?php echo CHtml::encode($delivery->name) ?></span>
-					</label>
-					<p><?=$delivery->description?></p>
-				</li>
-				<?php endforeach; ?>
-		</div>
-	</div>
-
-	<div class="user_data rc5">
-		<h2>Адрес получателя</h2>
-
-		<div class="form wide">
-			<?php echo CHtml::errorSummary($this->form); ?>
-
-			<div class="row">
-				<?php echo CHtml::activeLabel($this->form,'name', array('required'=>true)); ?>
-				<?php echo CHtml::activeTextField($this->form,'name'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo CHtml::activeLabel($this->form,'email', array('required'=>true)); ?>
-				<?php echo CHtml::activeTextField($this->form,'email'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo CHtml::activeLabel($this->form,'phone'); ?>
-				<?php echo CHtml::activeTextField($this->form,'phone'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo CHtml::activeLabel($this->form,'address'); ?>
-				<?php echo CHtml::activeTextField($this->form,'address'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo CHtml::activeLabel($this->form,'comment'); ?>
-				<?php echo CHtml::activeTextArea($this->form,'comment'); ?>
-			</div>
-		</div>
-	</div>
 </div>
 <?php echo CHtml::endForm() ?>	
