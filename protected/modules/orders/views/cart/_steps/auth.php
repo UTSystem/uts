@@ -28,9 +28,13 @@
 <?php if(!Yii::app()->user->isGuest): ?>
 <script>
 	$('#collapseAuth').html('');
-	
-	$('#not_register').on('click', function(ev) {
-       $('#collapseAuth').collapse('hide');
+</script>
+<?php else: ?>
+<script>
+	$('#not_register').on('click', function() {
+		$('#collapseAuth').collapse('hide');
+		$('#collapseContacts').collapse('show');
+		return false;
     });
 </script>
 <?php endif; ?>
