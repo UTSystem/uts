@@ -27,7 +27,7 @@ else $delivery_time = '10:00';
 		</div>
 
 		<p class="preview-price"><strong>Стоимость доставки:</strong> 2000 рублей</p>
-		<a href="#" class="btn btn-info">Продолжить</a>
+		<a href="#" id="cart_date_continue" class="btn btn-info">Продолжить</a>
 	</div>
 </fieldset>
 
@@ -38,5 +38,10 @@ else $delivery_time = '10:00';
     }).data('datepicker');
 	
 	$('#delivery_time').timepicker({'timeFormat': 'H:i'});
-	
+
+	$('#cart_date_continue').on('click', function() {
+		$('#collapseDate').collapse('hide');
+		$('#collapseConfirm').collapse('show');
+		return false;
+    });
 </script>

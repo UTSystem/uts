@@ -53,5 +53,14 @@
 				</div>
 			</div>
 		</div>
+		<a href="#" id="cart_delivery_continue" class="btn-flat">Продолжить</a>
 	</div>
 </fieldset>
+
+<script>
+	$('#cart_delivery_continue').on('click', function() {
+		$('#collapseDelivery').collapse('hide');
+		$('#collapseDate').collapse('show');
+		return false;
+    });
+</script>

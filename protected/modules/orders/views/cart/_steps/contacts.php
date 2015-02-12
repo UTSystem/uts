@@ -24,3 +24,11 @@
 		<a href="#" class="btn-flat" id="cart_contacts_continue">Продолжить</a>
 	</div>
 </fieldset>
+
+<script>
+	$('#cart_contacts_continue').on('click', function() {
+		$('#collapseContacts').collapse('hide');
+		$('#collapseDelivery').collapse('show');
+		return false;
+    });
+</script>
