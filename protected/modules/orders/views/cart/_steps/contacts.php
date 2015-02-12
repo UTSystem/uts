@@ -3,7 +3,7 @@
 	<a href="#collapseContacts" data-parent="#order_data" data-toggle="collapse" class="">
 		<legend>Контактные данные</legend>
 	</a>
-	<div class="panel-collapse collapse" id="collapseContacts" style="height: auto;">
+	<div class="panel-collapse collapse" id="collapseContacts" style="height: auto; width: 392px">
 		<span>Укажите контактные данные человека, который будет получать заказ</span>
 
 		<div class="form-group">

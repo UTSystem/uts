@@ -128,7 +128,6 @@ if(empty($items))
 
 
 <div id="order_data" class="panel-group">
-	<?php //if(Yii::app()->user->isGuest)	$this->renderPartial('_steps/auth'); ?>
 	<?php $this->renderPartial('_steps/auth'); ?>
 	<?php $this->renderPartial('_steps/contacts'); ?>
 	<?php $this->renderPartial('_steps/delivery'); ?>
