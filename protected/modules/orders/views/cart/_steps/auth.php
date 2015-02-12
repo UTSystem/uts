@@ -40,7 +40,9 @@
 
 <?php if(!Yii::app()->user->isGuest): ?>
 <script>
-	$('#collapseAuth').html('');
+	$(document).ready(function() {
+		$('#collapseAuth').html('');
+	});
 </script>
 <?php endif; ?>
 

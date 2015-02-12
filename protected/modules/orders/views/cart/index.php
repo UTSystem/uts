@@ -7,6 +7,8 @@
  * @var $totalPrice integer
  */
 
+Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/jquery.validate.min.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/additional-methods.min.js', CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl.'/cart.js', CClientScript::POS_END);
 Yii::app()->clientScript->registerScript('cartScript', "var orderTotalPrice = '$totalPrice';", CClientScript::POS_HEAD);
 
@@ -21,7 +23,7 @@ if(empty($items))
 }
 ?>
 
-<?php echo CHtml::form() ?>
+<?php echo CHtml::form('','post',array('id'=>'cartId')) ?>
 <table width="100%" id='cart_table'>
 	<tr>
 		<th>Товар</th>
