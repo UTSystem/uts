@@ -61,10 +61,10 @@ if(empty($items))
 			</td>
 			<td valign="top">
 				<span class="number-wrap">
-					<span class="arr-down" role="ArrDown">
+					<span class="arr-down">
 						<?php
 							echo CHtml::Ajaxlink('-', array('/cart/CountDown/'.$index), array('class'=>'price-extend delete',
-								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'data' => array('recount' => '1' ), // посылаем значения
 								'success' => "function(data)
 								{
 									$('#cart_table').html(data);
@@ -74,10 +74,10 @@ if(empty($items))
 					</span>
 					<span class="numb-value"><?php echo $product['quantity'];?></span>
 					<input id="quantities_<?php echo $index;?>" name="quantities[<?php echo $index;?>]" type="number" min="1" class="number numb-value" value="<?php echo $product['quantity'];?>"/>
-					<span class="arr-up" role="ArrUp">
+					<span class="arr-up">
 						<?php 
 							echo CHtml::Ajaxlink('+', array('/cart/CountUp/'.$index), array('class'=>'price-extend delete',
-								'data' => array('quantities' => $product['quantity'], 'recount' => '1' ), // посылаем значения
+								'data' => array('recount' => '1' ), // посылаем значения
 								'success' => "function(data)
 								{
 									$('#cart_table').html(data);

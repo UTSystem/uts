@@ -158,10 +158,11 @@ class CartController extends Controller
 	 */
 	public function	actionCountUp($index)
 	{
-
-		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount') && !empty($_REQUEST['quantities']))
+		$cart_data = Yii::app()->cart->getData();
+	
+		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount'))
 		{
-			$quantities[$index]=Yii::app()->request->getParam('quantities')+1;
+			$quantities[$index]=$cart_data[$index]['quantity']+1;
 			Yii::app()->cart->recount($quantities);
 		}
 
@@ -180,9 +181,11 @@ class CartController extends Controller
 	 */
 	public function actionCountDown($index)
 	{
-		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount') && !empty($_REQUEST['quantities']))
+		$cart_data = Yii::app()->cart->getData();
+	
+		if(Yii::app()->request->isAjaxRequest && Yii::app()->request->getParam('recount'))
 		{
-			$quantities[$index]=Yii::app()->request->getParam('quantities')-1;
+			$quantities[$index]=$cart_data[$index]['quantity']-1;
 			Yii::app()->cart->recount($quantities);
 		}
 
