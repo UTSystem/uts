@@ -1,8 +1,8 @@
 <fieldset class="panel">
     <a href="#collapseContacts" data-parent="#order_data" data-toggle="collapse" class="">
-		<legend>Контактные данные</legend>
+		<legend id="collapse_legend">Контактные данные</legend>
 	</a>
-	
+
 	<div class="panel-collapse collapse" id="collapseContacts" style="height: auto; width: 392px">
 		<span>Укажите контактные данные человека, который будет получать заказ</span>
 
@@ -25,14 +25,13 @@
 		<div class="form-group">
 			<?php echo CHtml::activeTextArea($this->form,'comment', array('placeholder'=>"Примечание")); ?>
 		</div>
-
 		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDelivery" class="btn-flat">Продолжить</button>
-		<!--<a href="#" class="btn-flat" id="cart_contacts_continue">Продолжить</a>-->
     </div>
 </fieldset>
 
 <script>
 	$(document).ready(function() {
+
 		jQuery.validator.addMethod("phoneno", function(phone_number, element) {
     	    phone_number = phone_number.replace(/\s+/g, "");
     	    return this.optional(element) || phone_number.length > 9 && 
@@ -40,16 +39,38 @@
     	}, "<br />Введите правильный номер телефона");
 		
 		
-		$('button').on('click', function() {
+		/*$('button, #collapse_legend').on('click', function() {
+			
+		});*/
+		
+		$('button, #collapse_legend').on('click', function() {
 			var form = $( "#cartId" );
 			
-			i=0;
+			//i=0;
 			
 			$.validator.setDefaults({
 				ignore: []
 			});
 			
 			form.validate({
+				focusInvalid: true,
+				invalidHandler: function(form, validator) {
+                    var errors = validator.numberOfInvalids();
+					if (errors) {
+                        console.log('нажали кнопку');
+                        $(validator.errorList[0].element).closest('div.collapse').collapse('show'); 
+						validator.errorList[0].element.focus();
+						return false;
+                    }
+                },
+				/*showErrors: function (errorMap, errorList) {
+					//console.log(this.currentElements);
+					
+					if (errorList.length) {
+						console.log(errorList.length);
+						$(errorList[0].element).closest('div.collapse').collapse('show'); 
+					}
+				},*/
 				rules: {
 					'OrderCreateForm[phone]': {
 						required: true,
@@ -81,32 +102,34 @@
 						maxlength: "Пароль должен быть максимум 16 символов",
 					},
 				},
-				highlight: function(element, errorClass, validClass) {
+				/*highlight: function(element, errorClass, validClass) {
+					console.log("elem="+$(element).closest('div.collapse')[0]);
+					
+					//console.log('elem_valid'+$(element).valid());
 					i++;
+										
 					
-					
-					console.log($(element).closest('div.collapse').eq(0));
-					if(i==1) $(element).closest('div.collapse').eq(0).collapse('show');
-					
-					// показываем только один error элемент
-					/*$(document).on('show.bs.collapse', function (e) {
-						//e.preventDefault();
-						i++;
-					});*/
-					
-					console.log(i);
-					
-				}
-				/*showErrors: function (errorMap, errorList) {
-					console.log(errorList);
-					//console.log(errorMap);
-					if (errorList.length) {
-						$("span").html(errorList[0].message);
+					//console.log($(element).closest('div.collapse').eq(0));
+					if(i==1) 
+					{
+						$(element).closest('div.collapse').collapse('hide');
+						
+						
+						
+						$(element).closest('div.collapse').eq(0).collapse('show'); 
+						return false;
 					}
-				}*/
+					
+					
+					//console.log(i);
+					
+				},*/
+				//onclick: false,
+				
 			});
+			console.log('нажали');
 			//if(!form.valid()) return false;
-			console.log(form.valid());
+			//console.log(form.valid());
 		});
 	});
 </script>
