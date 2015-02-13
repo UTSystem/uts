@@ -151,6 +151,12 @@ if(empty($items))
 		
 		$('.panel_collapse').hide();
 		
+		<?php if(!Yii::app()->user->isGuest): ?>
+		$('#collapseAuth').html('');
+		<?php else: ?>
+		$('#collapseAuth').show();
+		<?php endif; ?>
+		
 		$('.link_collapse').on('click', function() {
 			id_this = $(this).closest('fieldset').find('.panel_collapse').attr('id');
 			$('fieldset > div.panel_collapse').hide();
@@ -279,6 +285,22 @@ if(empty($items))
 	
 </script>
 <style>
+.panel{
+	box-shadow: none;
+	margin-top: 0px !important;
+}
+
+.panel-group .panel {
+    border-radius: 0px;
+    margin: 0;
+    margin-top: 0px !important;
+}
+
+fieldset
+{
+	border-top:0 !important;
+	border-bottom:0 !important;
+}
 .error{
   color: red;
 }
