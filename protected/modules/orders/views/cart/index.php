@@ -139,3 +139,147 @@ if(empty($items))
 	<?php //$this->renderPartial('_steps/confirm'); ?>
 </div>
 <?php echo CHtml::endForm() ?>
+
+<script>
+	$(document).ready(function() {
+
+		jQuery.validator.addMethod("phoneno", function(phone_number, element) {
+    	    phone_number = phone_number.replace(/\s+/g, "");
+    	    return this.optional(element) || phone_number.length > 9 && 
+    	    phone_number.match(/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/);
+    	}, "<br />Введите правильный номер телефона");
+		
+		$('.panel_collapse').hide();
+		
+		$('.link_collapse').on('click', function() {
+			id_this = $(this).closest('fieldset').find('.panel_collapse').attr('id');
+			$('fieldset > div.panel_collapse').hide();
+			$('#'+id_this).show();
+			
+			
+			 /*$('fieldset > div.collapse').each(function() { 
+				 var ids = $(this).attr('id');
+				 if(ids!=id_this) {console.log(ids); $('#'+ids).hide();}
+			 });*/
+			
+			//$('#collapseDelivery').collapse('hide');
+			
+			//$(this).closest('fieldset').find('.collapse').collapse('toggle');
+			//$('#'+id_this).collapse('toggle');
+			
+		});
+		
+		$('.continue_panel_collapse').on('click', function() {
+			id_this = $(this).closest('fieldset').find('.panel_collapse').attr('id');
+			id_next =$(this).closest('fieldset').next('fieldset').find('.panel_collapse').attr('id');
+			
+			console.log(id_next);
+			
+			$('fieldset > div.panel_collapse').hide();
+			$('#'+id_this).hide();
+			//$('#'+id_next).find('input').focus();
+			$('#'+id_next).show();
+		});
+		
+		$('button').on('click', function() {
+			var form = $( "#cartId" );
+			
+			//i=0;
+			
+			$.validator.setDefaults({
+				ignore: []
+			});
+			
+			form.validate({
+				focusInvalid: true,
+				invalidHandler: function(form, validator) {
+                    var errors = validator.numberOfInvalids();
+					if (errors) {
+                        $('fieldset > div.panel_collapse').hide();
+                        $(validator.errorList[0].element).closest('div.panel_collapse').show(); 
+						validator.errorList[0].element.focus();
+						return false;
+                    }
+                },
+				/*showErrors: function (errorMap, errorList) {
+					//console.log(this.currentElements);
+					
+					if (errorList.length) {
+						console.log(errorList.length);
+						$(errorList[0].element).closest('div.collapse').collapse('show'); 
+					}
+				},*/
+				rules: {
+					'OrderCreateForm[phone]': {
+						required: true,
+						phoneno: true
+					},
+					'OrderCreateForm[email]': {
+						required: true,
+						email: true
+					},
+					'OrderCreateForm[user_city]': {
+						required: true,
+						minlength: 2
+					}
+				},
+				messages:{
+					'OrderCreateForm[phone]':{
+						required: "Это поле обязательно для заполнения",
+						minlength: "Логин должен быть минимум 4 символа",
+						maxlength: "Максимальное число символо - 16",
+					},
+					'OrderCreateForm[email]':{
+						required: "Это поле обязательно для заполнения",
+						minlength: "Email должен быть минимум 6 символа",
+						maxlength: "Email должен быть максимум 16 символов",
+					},
+					'OrderCreateForm[user_city]':{
+						required: "Это поле обязательно для заполнения",
+						minlength: "Пароль должен быть минимум 6 символа",
+						maxlength: "Пароль должен быть максимум 16 символов",
+					},
+				},
+				/*highlight: function(element, errorClass, validClass) {
+					console.log("elem="+$(element).closest('div.collapse')[0]);
+					
+					//console.log('elem_valid'+$(element).valid());
+					i++;
+										
+					
+					//console.log($(element).closest('div.collapse').eq(0));
+					if(i==1) 
+					{
+						$(element).closest('div.collapse').collapse('hide');
+						
+						
+						
+						$(element).closest('div.collapse').eq(0).collapse('show'); 
+						return false;
+					}
+					
+					
+					//console.log(i);
+					
+				},*/
+				onclick: false,
+				
+			});
+			//if(!form.valid()) return false;
+			//console.log(form.valid());
+		});
+	});
+	
+	var delivery_date = $('#delivery_date').datepicker().on('changeDate', function(ev) {
+        delivery_date.hide();
+    }).data('datepicker');
+	
+	$('#delivery_time').timepicker({'timeFormat': 'H:i'});
+	
+	
+</script>
+<style>
+.error{
+  color: red;
+}
+</style>

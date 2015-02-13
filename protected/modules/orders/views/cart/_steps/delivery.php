@@ -1,9 +1,9 @@
-<fieldset class="panel">
-	<a href="#collapseDelivery" data-parent="#order_data" data-toggle="collapse" class="">
+<fieldset>
+	<a href="#" class="link_collapse">
 		<legend>Способ получения заказа и адрес доставки</legend>
 	</a>
 	
-	<div class="panel-collapse collapse" id="collapseDelivery" style="height: auto; width: 460px">
+	<div class="panel_collapse" id="collapseDelivery" style="height: auto; width: 460px">
 		<span class="pseudo-title">Выберите способ получения заказа</span>
 		<div class="link-controls">
 			<a href="#courier" data-toggle="tab" class="sel"><span>Курьерская доставка</span></a>
@@ -11,7 +11,6 @@
 		</div>
 		
 		<div class="tab-content">
-			
 			<div class="tab-pane fade in active" id="courier">
 				<legend class="sub">Адрес доставки</legend>
 				<div class="form-group-address form-group">
@@ -53,15 +52,7 @@
 				</div>
 			</div>
 		</div>
-		<!--<a href="#" id="cart_delivery_continue" class="btn-flat">Продолжить</a>-->
-		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDate" class="btn-flat">Продолжить</button>
+		<a href="#" class="btn-flat continue_panel_collapse">Продолжить</a>
+		<!--<button class="btn-flat button-panel_collapse">Продолжить</button>-->
 	</div>
 </fieldset>
-
-<script>
-	/*$('#cart_delivery_continue').on('click', function() {
-		$('.collapse').collapse('hide');
-		$('#collapseDate').collapse('show');
-		return false;
-    });*/
-</script>

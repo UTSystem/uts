@@ -11,11 +11,11 @@ if ($_POST['OrderCreateForm']['delivery_time'])	$delivery_time = $_POST['OrderCr
 else $delivery_time = '10:00';
 
 ?>
-<fieldset class="panel">
-	<a href="#collapseDate" data-parent="#order_data" data-toggle="collapse" class="">
+<fieldset>
+	<a href="#" class="link_collapse">
 		<legend>Дата и стоимость доставки</legend>
 	</a>
-	<div class="panel-collapse collapse" id="collapseDate" style="height: auto;">
+	<div class="panel_collapse" id="collapseDate" style="height: auto;">
 		<div class="form-group">
 			<span class="pseudo-title">Выберите дату доставки</span>
 			<?php echo CHtml::activeTextField($this->form, 'delivery_date', array('style' => "width:200px;", "id" => "delivery_date", 'class' => "form-control", 'data-date-format' => 'dd.mm.yyyy', 'value' => $delivery_date)); ?>
@@ -27,16 +27,7 @@ else $delivery_time = '10:00';
 		</div>
 
 		<p class="preview-price"><strong>Стоимость доставки:</strong> 2000 рублей</p>
-		<!--<a href="#" id="cart_date_continue" class="btn btn-info">Продолжить</a>-->
-		<button data-toggle="collapse" data-parent="#order_data" href="#collapseDate" class="btn btn-info">Продолжить</button>
+		<a href="#" class="btn-info continue_panel_collapse">Продолжить</a>
+		<!--<button class="btn btn-info continue_panel_collapse">Продолжить</button>-->
 	</div>
 </fieldset>
-
-<script>
-    var delivery_date = $('#delivery_date').datepicker().on('changeDate', function(ev) {
-        //console.log(dt);
-        delivery_date.hide();
-    }).data('datepicker');
-	
-	$('#delivery_time').timepicker({'timeFormat': 'H:i'});
-</script>
